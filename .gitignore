@@ -19,3 +19,8 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw*
+
+# Amplify service directories and files
+/amplify
+.amplifyrc
+/src/aws-exports.js
