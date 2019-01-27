@@ -2,7 +2,6 @@
   <v-menu
     :close-on-content-click="false"
     :nudge-width="300"
-    attach
     offset-y
     bottom
     left

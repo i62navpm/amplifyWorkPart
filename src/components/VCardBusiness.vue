@@ -33,6 +33,7 @@
         <v-spacer />
         <v-btn
           flat
+          :to="{name: 'company'}"
           color="primary"
         >
           Share
@@ -50,7 +51,7 @@
 
 <script>
 export default {
-  name: 'VCardUser',
+  name: 'VCardBusiness',
   props: {
     company: {
       type: Object,
