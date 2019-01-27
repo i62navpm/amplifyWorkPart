@@ -3,9 +3,15 @@
     color="amber"
     absolute
     clipped-left
+    app
   >
     <v-toolbar-title class="headline">
-      <span>Nóminas</span>
+      <router-link
+        class="toolbar__title"
+        to="/"
+      >
+        <span>Nóminas</span>
+      </router-link>
     </v-toolbar-title>
     <v-spacer />
     <v-card-user :data="attributes" />
@@ -38,3 +44,11 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" scoped>
+.toolbar__title {
+  color: inherit;
+  text-decoration: none;
+}
+</style>
+
