@@ -7,7 +7,12 @@
         fill-height
         class="grey lighten-4"
       >
-        <router-view />
+        <transition
+          name="fade"
+          mode="out-in"
+        >
+          <router-view />
+        </transition>
       </v-container>
     </v-content>
   </v-app>
