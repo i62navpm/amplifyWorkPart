@@ -2,7 +2,7 @@
   <v-toolbar
     color="amber"
     absolute
-    clipped-left
+    :extended="extendToolbar"
     app
   >
     <v-toolbar-title class="headline">
@@ -29,6 +29,9 @@ export default {
     attributes() {
       const { attributes = {} } = this.$store.getters.getUser
       return attributes
+    },
+    extendToolbar() {
+      return this.$store.getters.getExtended
     },
   },
   methods: {
