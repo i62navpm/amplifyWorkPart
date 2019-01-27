@@ -10,7 +10,7 @@
       <v-flex
         xs12
         sm8
-        md4
+        md6
       >
         <amplify-authenticator :auth-config="{signUpConfig}" />
       </v-flex>
@@ -31,3 +31,16 @@ export default {
   }),
 }
 </script>
+
+<style lang="scss">
+.Form__formSection___3tqxz {
+  display: block;
+  min-width: inherit;
+  .error {
+    margin-top: 1.5em;
+    color: red !important;
+    background-color: inherit !important;
+    border-color: inherit !important;
+  }
+}
+</style>
