@@ -29,7 +29,7 @@
       >
         <v-container>
           <v-layout wrap>
-            <amplify-photo-picker :photo-picker-config="photoPickerConfig" />
+            <v-upload-image />
             <v-flex
               xs12
               md6
@@ -116,8 +116,13 @@
 </template>
 
 <script>
+import VUploadImage from './VUploadImage'
+
 export default {
   name: 'VCardBusinessForm',
+  components: {
+    VUploadImage,
+  },
   props: {
     company: {
       type: Object,
