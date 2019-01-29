@@ -28,8 +28,19 @@
         @keyup.enter.native="save"
       >
         <v-container>
+          <v-layout
+            align-center
+            justify-center
+            wrap
+          >
+            <v-flex
+              xs12
+              md6
+            >
+              <v-upload-image />
+            </v-flex>
+          </v-layout>
           <v-layout wrap>
-            <v-upload-image />
             <v-flex
               xs12
               md6

@@ -1,28 +1,27 @@
 <template>
-  <v-flex
-    xs12
-    class="text-xs-center text-sm-center text-md-center text-lg-center"
-  >
-    <img
-      v-if="imageUrl"
-      :src="imageUrl"
-      height="150"
+  <v-hover>
+    <v-card
+      slot-scope="{ hover }"
+      :class="`elevation-${hover ? 6 : 2}`"
     >
-    <v-text-field
-      v-model="imageName"
-      readonly=""
-      label="Selecciona una imagen"
-      prepend-icon="image"
-      @click="pickFile"
-    />
-    <input
-      ref="image"
-      type="file"
-      style="display: none"
-      accept="image/*"
-      @change="onFilePicked"
-    >
-  </v-flex>
+      <v-img
+        :src="
+          imageUrl"
+        :lazy-src="require('../assets/images/businessDefault.png')"
+        contain
+        class="blue-grey lighten-5 upload-image"
+        height="150"
+        @click="pickFile"
+      />
+      <input
+        ref="image"
+        type="file"
+        style="display: none"
+        accept="image/*"
+        @change="onFilePicked"
+      >
+    </v-card>
+  </v-hover>
 </template>
 
 <script>
@@ -64,9 +63,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.card--flex-toolbar {
-  z-index: 6;
-  margin-top: -64px;
+.upload-image {
+  cursor: pointer;
 }
 </style>
 
