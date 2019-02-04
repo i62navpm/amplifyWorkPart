@@ -4,10 +4,18 @@
       slot-scope="{ hover }"
       :class="`elevation-${hover ? 6 : 2}`"
     >
+      <v-btn
+        v-if="imageUrl"
+        icon
+        class="close-button"
+        @click.native="removeFile"
+      >
+        <v-icon>
+          close
+        </v-icon>
+      </v-btn>
       <v-img
-        :src="
-          imageUrl"
-        :lazy-src="require('../assets/images/businessDefault.png')"
+        :src="imageUrl || defaultImage"
         contain
         class="blue-grey lighten-5 upload-image"
         height="150"
@@ -30,6 +38,7 @@ export default {
   data: () => ({
     title: 'Image Upload',
     dialog: false,
+    defaultImage: require('../assets/images/businessDefault.png'),
     imageName: '',
     imageUrl: '',
     imageFile: '',
@@ -50,19 +59,27 @@ export default {
         fr.readAsDataURL(files[0])
         fr.addEventListener('load', () => {
           this.imageUrl = fr.result
-          this.imageFile = files[0] // this is an image file that can be sent to server...
+          this.imageFile = files[0]
         })
       } else {
-        this.imageName = ''
-        this.imageFile = ''
-        this.imageUrl = ''
+        this.removeFile()
       }
+    },
+    removeFile() {
+      this.imageName = ''
+      this.imageFile = ''
+      this.imageUrl = ''
     },
   },
 }
 </script>
 
 <style lang="scss" scoped>
+.close-button {
+  position: absolute;
+  z-index: 10;
+  right: 0;
+}
 .upload-image {
   cursor: pointer;
 }
