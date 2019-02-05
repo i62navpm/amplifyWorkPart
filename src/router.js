@@ -22,6 +22,20 @@ const router = new Router({
       meta: { requiresAuth: true },
     },
     {
+      path: '/people/:id?',
+      name: 'people',
+      component: () =>
+        import(/* webpackChunkName: "people" */ './views/People.vue'),
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/person/:id?',
+      name: 'person',
+      component: () =>
+        import(/* webpackChunkName: "person" */ './views/Person.vue'),
+      meta: { requiresAuth: true },
+    },
+    {
       path: '/auth',
       name: 'auth',
       component: () =>
@@ -55,7 +69,7 @@ async function getUser() {
 }
 
 router.beforeResolve(async (to, from, next) => {
-  store.commit('setExtended', ['company'].includes(to.name))
+  store.commit('setExtended', ['company', 'person'].includes(to.name))
   if (to.matched.some(record => record.meta.requiresAuth)) {
     const user = await getUser()
     if (!user.username) {
