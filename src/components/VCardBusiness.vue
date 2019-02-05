@@ -1,61 +1,57 @@
 <template>
-  <v-hover>
-    <v-card
-      slot-scope="{ hover }"
-      class="mx-auto"
-      max-width="400"
+  <v-card
+    class="mx-auto"
+    max-width="400"
+  >
+    <v-img
+      src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
+      aspect-ratio="2.75"
+    />
+    <v-card-title
+      class="pb-0"
+      primary-title
+      style="position: relative;"
     >
-      <v-img
-        src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
-        aspect-ratio="2.75"
+      <v-btn
+        absolute
+        color="primary"
+        class="white--text"
+        fab
+        right
+        top
+        :to="{name: 'people'}"
       >
-        <v-expand-transition>
-          <div
-            v-if="hover"
-            class="d-flex transition-fast-in-fast-out primary darken-2 v-card--reveal display-3 white--text"
-            style="height: 100%;"
-          >
-            Plantilla
-          </div>
-        </v-expand-transition>
-      </v-img>
+        <v-icon>people</v-icon>
+      </v-btn>
 
-      <v-card-title primary-title>
-        <div>
-          <h3 class="headline mb-0">
-            Kangaroo Valley Safari
-          </h3>
-          <div>Located two hours south of Sydney in the Southern Highlands of New South Wales, ...</div>
-        </div>
-      </v-card-title>
+      <div>
+        <h3 class="headline mb-0">
+          Kangaroo Valley Safari
+        </h3>
+        <div>Located two hours south of Sydney in the Southern Highlands of New South Wales, ...</div>
+      </div>
+    </v-card-title>
 
-      <v-card-actions>
-        <v-btn
-          flat
-          icon
-          :to="{name: 'company'}"
-          color="warning"
-        >
-          <v-icon>edit</v-icon>
-        </v-btn>
-        <v-btn
-          flat
-          icon
-          color="error"
-          @click.native="removeBusiness"
-        >
-          <v-icon>delete</v-icon>
-        </v-btn>
-        <v-spacer />
-        <v-btn
-          flat
-          color="primary"
-        >
-          Entrar
-        </v-btn>
-      </v-card-actions>
-    </v-card>
-  </v-hover>
+    <v-card-actions>
+      <v-spacer />
+      <v-btn
+        flat
+        icon
+        color="red"
+        @click.native="removeBusiness"
+      >
+        <v-icon>delete</v-icon>
+      </v-btn>
+      <v-btn
+        flat
+        icon
+        :to="{name: 'company'}"
+        color="green"
+      >
+        <v-icon>edit</v-icon>
+      </v-btn>
+    </v-card-actions>
+  </v-card>
 </template>
 
 <script>
@@ -76,14 +72,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.v-card--reveal {
-  align-items: center;
-  bottom: 0;
-  justify-content: center;
-  opacity: 0.5;
-  position: absolute;
-  width: 100%;
-}
-</style>
 
