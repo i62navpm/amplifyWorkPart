@@ -60,6 +60,7 @@ export default {
         fr.addEventListener('load', () => {
           this.imageUrl = fr.result
           this.imageFile = files[0]
+          this.$emit('onUploadImage', this.imageUrl)
         })
       } else {
         this.removeFile()
@@ -69,6 +70,7 @@ export default {
       this.imageName = ''
       this.imageFile = ''
       this.imageUrl = ''
+      this.$emit('onUploadImage', this.imageUrl)
     },
   },
 }
