@@ -10,6 +10,7 @@
   "dependencies": {
     "aws-amplify": "^1.1.19",
     "aws-amplify-vue": "^0.2.5",
+    "identicon.js": "^2.3.3",
     "register-service-worker": "^1.5.2",
     "vue": "^2.5.21",
     "vue-router": "^3.0.1",
