@@ -30,19 +30,28 @@
       </v-card-title>
 
       <v-card-actions>
-        <v-spacer />
         <v-btn
           flat
+          icon
           :to="{name: 'company'}"
-          color="primary"
+          color="warning"
         >
-          Share
+          <v-icon>edit</v-icon>
         </v-btn>
         <v-btn
           flat
+          icon
+          color="error"
+          @click.native="removeBusiness"
+        >
+          <v-icon>delete</v-icon>
+        </v-btn>
+        <v-spacer />
+        <v-btn
+          flat
           color="primary"
         >
-          Explore
+          Entrar
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -57,6 +66,11 @@ export default {
       type: Object,
       required: true,
       default: () => ({}),
+    },
+  },
+  methods: {
+    removeBusiness() {
+      console.log(this.company)
     },
   },
 }
