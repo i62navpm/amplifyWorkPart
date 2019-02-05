@@ -37,7 +37,7 @@
               xs12
               md6
             >
-              <v-upload-image />
+              <v-upload-image @onUploadImage="saveImage" />
             </v-flex>
           </v-layout>
           <v-layout wrap>
@@ -156,8 +156,11 @@ export default {
         return
       }
       this.loading = true
-      console.log(this.company)
+      this.$emit('onSubmit', this.company)
       this.loading = false
+    },
+    saveImage(url) {
+      this.company.image = url
     },
   },
 }
