@@ -12,6 +12,7 @@
       <v-card-business-form
         :company="{}"
         @onClose="closeForm"
+        @onSubmit="saveForm"
       />
     </v-flex>
   </v-layout>
@@ -27,6 +28,9 @@ export default {
   methods: {
     closeForm() {
       this.$router.push({ name: 'home' })
+    },
+    saveForm(data) {
+      console.log(data)
     },
   },
 }
