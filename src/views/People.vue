@@ -1,14 +1,10 @@
 <template>
   <v-layout
-    align-start
+    align-center
     justify-center
-    row
-    fill-height
+    column
   >
-    <v-card-person
-      class="mx-1"
-      :person="{}"
-    />
+    <v-card-person :person="{}" />
   </v-layout>
 </template>
 
