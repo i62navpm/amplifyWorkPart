@@ -20,7 +20,7 @@
           fab
           right
           top
-          :to="{name: 'people'}"
+          :to="{name: 'worker', params: {id: Math.random()}}"
         >
           <v-icon>calendar_today</v-icon>
         </v-btn>

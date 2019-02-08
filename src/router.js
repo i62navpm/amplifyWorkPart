@@ -36,6 +36,13 @@ const router = new Router({
       meta: { requiresAuth: true },
     },
     {
+      path: '/worker/:id',
+      name: 'worker',
+      component: () =>
+        import(/* webpackChunkName: "worker" */ './views/Worker.vue'),
+      meta: { requiresAuth: true },
+    },
+    {
       path: '/auth',
       name: 'auth',
       component: () =>
