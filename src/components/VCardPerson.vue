@@ -27,12 +27,7 @@
         wrap
       >
         <v-flex xs2>
-          <v-avatar>
-            <img
-              :src="avatar"
-              alt="John"
-            >
-          </v-avatar>
+          <v-person-avatar :name="person.name" />
         </v-flex>
 
         <v-flex xs10>
@@ -67,10 +62,11 @@
 </template>
 
 <script>
-import Identicon from 'identicon.js'
+import VPersonAvatar from './VPersonAvatar'
 
 export default {
   name: 'VCardPerson',
+  components: { VPersonAvatar },
   props: {
     person: {
       type: Object,
@@ -80,11 +76,7 @@ export default {
   },
   computed: {
     avatar() {
-      const name = this.person.name || ''
-      return (
-        'data:image/png;base64,' +
-        new Identicon(name.padStart(15, '01'), 48).toString()
-      )
+      return avatar(this.person.name || '')
     },
   },
   methods: {
@@ -95,14 +87,11 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.v-card--reveal {
-  align-items: center;
-  bottom: 0;
-  justify-content: center;
-  opacity: 0.5;
-  position: absolute;
-  width: 100%;
+<style lang="scss">
+.avatar {
+  svg {
+    width: 100%;
+  }
 }
 </style>
 
