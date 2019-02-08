@@ -1,15 +1,14 @@
 <template>
-  <v-layout
-    align-start
-    justify-center
-    row
+  <v-container
+    grid-list-xl
     fill-height
   >
-    <v-card-business
-      class="mx-1"
-      :company="{}"
-    />
-  </v-layout>
+    <v-layout column>
+      <v-flex>
+        <v-card-business :company="{}" />
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>

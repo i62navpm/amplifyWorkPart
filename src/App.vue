@@ -2,18 +2,12 @@
   <v-app>
     <the-toolbar v-if="user" />
     <v-content>
-      <v-container
-        fluid
-        fill-height
-        class="grey lighten-4"
+      <transition
+        name="fade"
+        mode="out-in"
       >
-        <transition
-          name="fade"
-          mode="out-in"
-        >
-          <router-view />
-        </transition>
-      </v-container>
+        <router-view />
+      </transition>
     </v-content>
   </v-app>
 </template>

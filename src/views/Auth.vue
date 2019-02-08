@@ -20,6 +20,7 @@
 
 <script>
 import { components } from 'aws-amplify-vue'
+
 export default {
   components: {
     ...components,

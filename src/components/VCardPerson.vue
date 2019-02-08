@@ -5,7 +5,7 @@
       @onAccept="deletePerson"
     />
     <v-card
-      class="mx-auto my-4"
+      class="mx-auto mt-4"
       max-width="400"
     >
       <v-card-title
@@ -31,11 +31,18 @@
           justify-space-around
           wrap
         >
-          <v-flex xs2>
+          <v-flex
+            xs12
+            sm2
+            class="text-xs-center"
+          >
             <v-person-avatar :name="person.name" />
           </v-flex>
 
-          <v-flex xs10>
+          <v-flex
+            xs12
+            sm10
+          >
             <h3 class="headline mb-0">
               Kangaroo Valley Safari
             </h3>

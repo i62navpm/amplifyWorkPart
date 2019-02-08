@@ -1,11 +1,14 @@
 <template>
-  <v-layout
-    align-center
-    justify-center
-    column
+  <v-container
+    grid-list-xl
+    fill-height
   >
-    <v-card-person :person="{}" />
-  </v-layout>
+    <v-layout column>
+      <v-flex>
+        <v-card-person :person="{}" />
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>

@@ -1,21 +1,23 @@
 <template>
-  <v-layout
-    align-start
-    justify-center
-    row
-    fill-height
-  >
-    <v-flex
-      xs12
-      sm8
+  <v-container>
+    <v-layout
+      row
+      align-start
+      justify-center
     >
-      <v-card-person-form
-        :person="{}"
-        @onClose="closeForm"
-        @onSubmit="saveForm"
-      />
-    </v-flex>
-  </v-layout>
+      <v-flex
+        xs12
+        sm10
+        md8
+      >
+        <v-card-person-form
+          :person="{}"
+          @onClose="closeForm"
+          @onSubmit="saveForm"
+        />
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
