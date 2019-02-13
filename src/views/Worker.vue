@@ -22,14 +22,7 @@
       </v-flex>
 
       <v-flex xs12>
-        <v-card
-          dark
-          color="primary"
-        >
-          <v-card-text class="px-0">
-            12
-          </v-card-text>
-        </v-card>
+        <v-card-calendar :data="calendarData" />
       </v-flex>
     </v-layout>
   </v-container>
@@ -38,14 +31,32 @@
 <script>
 import VCardChartLine from '../components/VCardChartLine'
 import VCardChartPie from '../components/VCardChartPie'
+import VCardCalendar from '../components/VCardCalendar'
 
 export default {
   components: {
     VCardChartLine,
     VCardChartPie,
+    VCardCalendar,
   },
   data() {
     return {
+      calendarData: [
+        {
+          title: 'event1',
+          start: '2019-02-01',
+        },
+        {
+          title: 'event2',
+          start: '2019-02-05',
+          end: '2019-02-07',
+        },
+        {
+          title: 'event3',
+          start: '2019-02-09T12:30:00',
+          allDay: false,
+        },
+      ],
       chartData: {
         columns: ['date', 'cost', 'profit', 'growthRate', 'people'],
         rows: [
