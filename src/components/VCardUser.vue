@@ -1,7 +1,7 @@
 <template>
   <v-menu
     :close-on-content-click="false"
-    :nudge-width="300"
+    fixed
     offset-y
     bottom
     left
