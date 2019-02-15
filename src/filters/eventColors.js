@@ -1,5 +1,5 @@
 export default function(value) {
-  const colorEvent = {
+  const eventColors = {
     fullSalary: {
       textColor: '#008000',
       borderColor: '#008000',
@@ -27,5 +27,5 @@ export default function(value) {
     },
   }
 
-  return colorEvent[value] || colorEvent['default']
+  return eventColors[value] || eventColors['default']
 }
