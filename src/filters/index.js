@@ -1,4 +1,6 @@
 import Vue from 'vue'
-import calendarColors from './calendarColors'
+import eventColors from './eventColors'
+import eventName from './eventName'
 
-Vue.filter('calendarColors', calendarColors)
+Vue.filter('eventColors', eventColors)
+Vue.filter('eventName', eventName)
