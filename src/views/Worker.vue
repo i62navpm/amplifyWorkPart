@@ -53,8 +53,7 @@ export default {
         },
         {
           title: 'event3',
-          start: '2019-02-09T12:30:00',
-          allDay: false,
+          start: '2019-02-09',
         },
       ],
       chartData: {

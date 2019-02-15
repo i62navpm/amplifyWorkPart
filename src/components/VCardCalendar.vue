@@ -41,6 +41,7 @@ export default {
       config: {
         header: { left: 'title', center: '', right: 'today prev,next' },
         buttonText: { today: 'Hoy' },
+        editable: false,
         locale: 'es',
       },
     }
