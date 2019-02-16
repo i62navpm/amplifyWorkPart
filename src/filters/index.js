@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import eventColors from './eventColors'
+import eventColor from './eventColor'
 import eventName from './eventName'
 
-Vue.filter('eventColors', eventColors)
+Vue.filter('eventColor', eventColor)
 Vue.filter('eventName', eventName)
