@@ -6,19 +6,49 @@
     >
       <v-list>
         <v-subheader>Opciones:</v-subheader>
-        <v-list-tile
-          v-for="tile in tiles"
-          :key="tile.title"
-          @click="open = false"
-        >
+
+        <v-list-tile @click="open = false">
           <v-list-tile-avatar>
             <v-avatar>
-              <v-icon :color="tile.color">
-                {{ tile.icon }}
+              <v-icon color="success">
+                attach_money
               </v-icon>
             </v-avatar>
           </v-list-tile-avatar>
-          <v-list-tile-title>{{ tile.title }}</v-list-tile-title>
+          <v-list-tile-title>Pagar</v-list-tile-title>
+        </v-list-tile>
+
+        <v-list-tile @click="open = false">
+          <v-list-tile-avatar>
+            <v-avatar>
+              <v-icon color="primary">
+                place
+              </v-icon>
+            </v-avatar>
+          </v-list-tile-avatar>
+          <v-list-tile-title>Obras</v-list-tile-title>
+        </v-list-tile>
+
+        <v-list-tile @click="open = false">
+          <v-list-tile-avatar>
+            <v-avatar>
+              <v-icon color="warning">
+                money_off
+              </v-icon>
+            </v-avatar>
+          </v-list-tile-avatar>
+          <v-list-tile-title>Dar a cuenta</v-list-tile-title>
+        </v-list-tile>
+
+        <v-list-tile @click="open = false">
+          <v-list-tile-avatar>
+            <v-avatar>
+              <v-icon color="error">
+                delete
+              </v-icon>
+            </v-avatar>
+          </v-list-tile-avatar>
+          <v-list-tile-title>Eliminar</v-list-tile-title>
         </v-list-tile>
       </v-list>
     </v-bottom-sheet>
@@ -31,12 +61,7 @@ export default {
   data: function() {
     return {
       open: false,
-      tiles: [
-        { icon: 'attach_money', color: 'success', title: 'Pagar' },
-        { icon: 'place', color: 'primary', title: 'Obras' },
-        { icon: 'money_off', color: 'warning', title: 'Dar a cuenta' },
-        { icon: 'delete', color: 'error', title: 'Eliminar' },
-      ],
+      events: [],
     }
   },
   methods: {

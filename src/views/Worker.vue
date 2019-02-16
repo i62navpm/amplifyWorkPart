@@ -43,34 +43,24 @@ export default {
     return {
       calendarData: [
         {
-          allDay: true,
           money: 55,
           salary: 'fullSalary',
           start: '2019-02-01',
-          title: 'Full Salary',
-          backgroundColor: '#0080001a',
-          textColor: 'green',
-          borderColor: 'green',
         },
         {
-          allDay: true,
           money: 25,
           salary: 'halfSalary',
           start: '2019-02-01',
-          title: 'Half Salary',
-          backgroundColor: '#ff8c001a',
-          textColor: 'darkorange',
-          borderColor: 'darkorange',
         },
         {
-          allDay: true,
           money: 10,
           salary: 'customSalary',
           start: '2019-02-01',
-          title: 'Custom Salary',
-          backgroundColor: '#0000ff1a',
-          textColor: 'blue',
-          borderColor: 'blue',
+        },
+        {
+          money: 100,
+          salary: 'debtSalary',
+          start: '2019-02-01',
         },
       ],
       chartData: {
