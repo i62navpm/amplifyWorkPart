@@ -12,6 +12,18 @@
       </v-flex>
       <v-flex
         xs12
+        class="px-4"
+      >
+        <v-person-avatar
+          class="mr-3"
+          :name="'Name Test Surname 1'"
+        />
+        <span class="display-1 font-weight-light">
+          Name Test Surname 1
+        </span>
+      </v-flex>
+      <v-flex
+        xs12
         sm6
       >
         <v-card-chart-line :data="chartData" />
@@ -32,6 +44,7 @@
 
 <script>
 import TheBreadcrums from '../components/TheBreadcrums'
+import VPersonAvatar from '../components/VPersonAvatar'
 import VCardChartLine from '../components/VCardChartLine'
 import VCardChartPie from '../components/VCardChartPie'
 import VCardCalendar from '../components/VCardCalendar'
@@ -39,6 +52,7 @@ import VCardCalendar from '../components/VCardCalendar'
 export default {
   components: {
     TheBreadcrums,
+    VPersonAvatar,
     VCardChartLine,
     VCardChartPie,
     VCardCalendar,
