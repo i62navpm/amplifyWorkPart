@@ -1,9 +1,11 @@
 <template>
   <v-card max-height="350">
-    <ve-pie
-      :data="data"
-      height="350px"
-    />
+    <v-card-text>
+      <ve-pie
+        :data="data"
+        height="350px"
+      />
+    </v-card-text>
   </v-card>
 </template>
 

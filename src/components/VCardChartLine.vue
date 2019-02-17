@@ -1,9 +1,11 @@
 <template>
   <v-card max-height="350">
-    <ve-line
-      :data="data"
-      height="350px"
-    />
+    <v-card-text>
+      <ve-line
+        :data="data"
+        height="350px"
+      />
+    </v-card-text>
   </v-card>
 </template>
 
