@@ -15,8 +15,14 @@
           column
           wrap
         >
-          <v-flex>
-            <v-card-person :person="{}" />
+          <v-flex
+            v-for="(person, index) of people"
+            :key="person.id"
+          >
+            <v-card-person
+              :class="index && 'mt-4'"
+              :person="person"
+            />
           </v-flex>
         </v-layout>
       </v-flex>
@@ -32,6 +38,24 @@ export default {
   components: {
     TheBreadcrums,
     VCardPerson,
+  },
+  data() {
+    return {
+      people: [
+        {
+          id: 'aaa-bbb-ccc1',
+          description: 'Description mock 1',
+          image: null,
+          name: 'Name Test Surname 1',
+        },
+        {
+          id: 'aaa-bbb-ccc2',
+          description: 'Description mock2',
+          image: null,
+          name: 'Name Test Surname 2',
+        },
+      ],
+    }
   },
 }
 </script>

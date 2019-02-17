@@ -20,7 +20,7 @@
           fab
           right
           top
-          :to="{name: 'worker', params: {id: Math.random()}}"
+          :to="{name: 'worker', params: {id: person.id}}"
         >
           <v-icon>calendar_today</v-icon>
         </v-btn>
@@ -44,9 +44,9 @@
             sm10
           >
             <h3 class="headline mb-0">
-              Kangaroo Valley Safari
+              {{ person.name }}
             </h3>
-            <div>Located two hours south of Sydney in the Southern Highlands of New South Wales, ...</div>
+            <div>{{ person.description }}</div>
           </v-flex>
         </v-layout>
       </v-card-title>
