@@ -1,13 +1,15 @@
 <template>
   <v-container
     grid-list-xl
-    text-xs-center
     fluid
   >
     <v-layout
       row
       wrap
     >
+      <v-flex xs12>
+        <the-breadcrums :breadcrumbs="['business', 'people']" />
+      </v-flex>
       <v-flex
         xs12
         sm6
@@ -29,12 +31,14 @@
 </template>
 
 <script>
+import TheBreadcrums from '../components/TheBreadcrums'
 import VCardChartLine from '../components/VCardChartLine'
 import VCardChartPie from '../components/VCardChartPie'
 import VCardCalendar from '../components/VCardCalendar'
 
 export default {
   components: {
+    TheBreadcrums,
     VCardChartLine,
     VCardChartPie,
     VCardCalendar,
