@@ -8,7 +8,7 @@
       wrap
     >
       <v-flex xs12>
-        <the-breadcrums :breadcrumbs="['business', 'people']" />
+        <the-breadcrums :breadcrumbs="['home', 'people']" />
       </v-flex>
       <v-flex
         xs12

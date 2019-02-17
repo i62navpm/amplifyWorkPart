@@ -33,7 +33,7 @@ export default {
   data() {
     return {
       routes: {
-        business: {
+        home: {
           text: 'Empresas',
           href: 'home',
         },
