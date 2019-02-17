@@ -5,7 +5,7 @@
       @onAccept="deletePerson"
     />
     <v-card
-      class="mx-auto mt-4"
+      class="mx-auto"
       max-width="400"
     >
       <v-card-title
