@@ -1,7 +1,7 @@
 <template>
   <v-avatar
     size="52"
-    class="avatar"
+    class="avatar__person avatar"
   >
     <!-- eslint-disable-next-line vue/no-v-html -->
     <span v-html="avatar" />
@@ -28,10 +28,12 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .avatar {
-  svg {
-    width: 100%;
+  &.avatar__person {
+    svg {
+      width: 100%;
+    }
   }
 }
 </style>
