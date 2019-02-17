@@ -49,6 +49,7 @@ export default {
         editable: false,
         showNonCurrentDates: false,
         locale: 'es',
+        longPressDelay: '200',
       },
     }
   },
