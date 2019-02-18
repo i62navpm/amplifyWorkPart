@@ -35,7 +35,7 @@
           >
             <v-flex
               xs12
-              md6
+              md11
             >
               <v-upload-image @onUploadImage="saveImage" />
             </v-flex>
