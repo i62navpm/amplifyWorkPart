@@ -39,7 +39,7 @@ export default {
         locale: {
           strings: {
             dropPasteImport: 'Pega o arrastra aquí la foto',
-            myDevice: 'Mi ordenador',
+            myDevice: 'Mis imagenes',
             cancel: 'Cancelar',
             xFilesSelected: {
               0: '%{smart_count} archivo seleccionado',
