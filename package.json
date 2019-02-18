@@ -10,6 +10,9 @@
   "dependencies": {
     "@dicebear/avatars": "^3.0.5",
     "@dicebear/avatars-male-sprites": "^2.0.5",
+    "@uppy/core": "^0.30.0",
+    "@uppy/dashboard": "^0.30.0",
+    "@uppy/webcam": "^0.30.0",
     "aws-amplify": "^1.1.19",
     "aws-amplify-vue": "^0.2.5",
     "echarts": "^4.1.0",
