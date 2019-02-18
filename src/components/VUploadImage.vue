@@ -4,86 +4,68 @@
       slot-scope="{ hover }"
       :class="`elevation-${hover ? 6 : 2}`"
     >
-      <v-btn
-        v-if="imageUrl"
-        icon
-        class="close-button"
-        @click.native="removeFile"
-      >
-        <v-icon>
-          close
-        </v-icon>
-      </v-btn>
-      <v-img
-        :src="imageUrl || defaultImage"
-        contain
-        class="blue-grey lighten-5 upload-image"
-        height="150"
-        @click="pickFile"
-      />
-      <input
-        ref="image"
-        type="file"
-        style="display: none"
-        accept="image/*"
-        @change="onFilePicked"
-      >
+      <div id="drag-drop-area" />
     </v-card>
   </v-hover>
 </template>
 
 <script>
+import Uppy from '@uppy/core'
+import Dashboard from '@uppy/dashboard'
+import Webcam from '@uppy/webcam'
+import '@uppy/core/dist/style.css'
+import '@uppy/webcam/dist/style.css'
+import '@uppy/dashboard/dist/style.css'
+
 export default {
   name: 'VUploadImage',
-  data: () => ({
-    title: 'Image Upload',
-    dialog: false,
-    defaultImage: require('../assets/images/businessDefault.png'),
-    imageName: '',
-    imageUrl: '',
-    imageFile: '',
-  }),
-  methods: {
-    pickFile() {
-      this.$refs.image.click()
-    },
+  mounted() {
+    const uppy = Uppy({
+      autoProceed: false,
+      restrictions: {
+        maxFileSize: 1e7,
+        maxNumberOfFiles: 1,
+        allowedFileTypes: ['image/*'],
+      },
+    })
+      .use(Dashboard, {
+        inline: true,
+        proudlyDisplayPoweredByUppy: false,
+        height: 300,
+        target: '#drag-drop-area',
+        replaceTargetContent: true,
+        showProgressDetails: true,
+        browserBackButtonClose: true,
+        locale: {
+          strings: {
+            dropPasteImport: 'Pega o arrastra aquí la foto',
+            myDevice: 'Mi ordenador',
+            cancel: 'Cancelar',
+            xFilesSelected: {
+              0: '%{smart_count} archivo seleccionado',
+            },
+            uploadXFiles: {
+              0: 'Subir %{smart_count} imagen',
+            },
+          },
+        },
+      })
+      .use(Webcam, {
+        target: Dashboard,
+        title: 'Cámara',
+        modes: ['picture'],
+        facingMode: 'user',
+      })
 
-    onFilePicked(e) {
-      const files = e.target.files
-      if (files[0] !== undefined) {
-        this.imageName = files[0].name
-        if (this.imageName.lastIndexOf('.') <= 0) {
-          return
-        }
-        const fr = new FileReader()
-        fr.readAsDataURL(files[0])
-        fr.addEventListener('load', () => {
-          this.imageUrl = fr.result
-          this.imageFile = files[0]
-          this.$emit('onUploadImage', this.imageUrl)
-        })
-      } else {
-        this.removeFile()
-      }
-    },
-    removeFile() {
-      this.imageName = ''
-      this.imageFile = ''
-      this.imageUrl = ''
-      this.$emit('onUploadImage', this.imageUrl)
-    },
+    uppy.on('complete', result => {
+      console.log(
+        'Upload complete! We’ve uploaded these files:',
+        result.successful
+      )
+    })
   },
 }
 </script>
 
-<style lang="scss" scoped>
-.close-button {
-  position: absolute;
-  z-index: 10;
-  right: 0;
-}
-.upload-image {
-  cursor: pointer;
-}
-</style>
+
 
