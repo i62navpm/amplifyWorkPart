@@ -35,7 +35,8 @@
           >
             <v-flex
               xs12
-              md11
+              lg11
+              xl7
             >
               <v-upload-image @onUploadImage="saveImage" />
             </v-flex>
