@@ -37,9 +37,22 @@ const router = new Router({
     },
     {
       path: '/worker/:id',
-      name: 'worker',
       component: () =>
         import(/* webpackChunkName: "worker" */ './views/Worker.vue'),
+      children: [
+        {
+          path: '',
+          name: 'worker',
+          component: () =>
+            import(/* webpackChunkName: "workerCalendar" */ './views/WorkerCalendar.vue'),
+        },
+        {
+          path: 'detail',
+          name: 'workerDetail',
+          component: () =>
+            import(/* webpackChunkName: "workerDetail" */ './views/WorkerDetail.vue'),
+        },
+      ],
       meta: { requiresAuth: true },
     },
     {
