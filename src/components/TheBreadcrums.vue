@@ -42,7 +42,11 @@ export default {
           href: 'people',
         },
         worker: {
-          text: 'Trabajador',
+          text: 'Calendario trabajador',
+          href: 'worker',
+        },
+        workerDetail: {
+          text: 'Detalles trabajador',
           href: 'worker',
         },
       },

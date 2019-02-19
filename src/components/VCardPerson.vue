@@ -26,7 +26,6 @@
         </v-btn>
 
         <v-layout
-          class="mt-3"
           align-center
           justify-space-around
           wrap
