@@ -1,7 +1,11 @@
 <template>
   <div>
-    <v-event-options
-      ref="eventOptions"
+    <v-event-options-new
+      ref="eventOptionsNew"
+      @onAccept="saveEvent"
+    />
+    <v-event-options-edit
+      ref="eventOptionsEdit"
       @onAccept="saveEvent"
     />
     <v-card>
@@ -22,7 +26,8 @@
 import Moment from 'moment'
 import { extendMoment } from 'moment-range'
 import { FullCalendar } from 'vue-full-calendar'
-import VEventOptions from './VEventOptions'
+import VEventOptionsNew from './VEventOptionsNew'
+import VEventOptionsEdit from './VEventOptionsEdit'
 import 'fullcalendar/dist/fullcalendar.css'
 
 const moment = extendMoment(Moment)
@@ -31,7 +36,8 @@ export default {
   name: 'VCardChartCalendar',
   components: {
     FullCalendar,
-    VEventOptions,
+    VEventOptionsNew,
+    VEventOptionsEdit,
   },
   props: {
     data: {
@@ -68,12 +74,18 @@ export default {
     },
     openEventOptions(events = []) {
       setTimeout(() => {
-        this.$refs.eventOptions.open = true
-        this.$refs.eventOptions.events = events
+        this.$refs.eventOptionsNew.open = true
+        this.$refs.eventOptionsNew.events = events
+      }, 100)
+    },
+    openEventOptionsEdit(events = []) {
+      setTimeout(() => {
+        this.$refs.eventOptionsEdit.open = true
+        this.$refs.eventOptionsEdit.events = events
       }, 100)
     },
     eventSelected(event) {
-      this.openEventOptions([event])
+      this.openEventOptionsEdit([event])
     },
     eventCreated(event) {
       const range = this.getRangeDates(

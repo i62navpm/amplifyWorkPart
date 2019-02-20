@@ -2,6 +2,7 @@
   <div class="text-xs-center">
     <v-bottom-sheet
       v-model="open"
+      inset
       lazy
     >
       <v-list>
@@ -10,34 +11,12 @@
         <v-list-tile @click="open = false">
           <v-list-tile-avatar>
             <v-avatar>
-              <v-icon color="success">
-                attach_money
-              </v-icon>
-            </v-avatar>
-          </v-list-tile-avatar>
-          <v-list-tile-title>Pagar</v-list-tile-title>
-        </v-list-tile>
-
-        <v-list-tile @click="open = false">
-          <v-list-tile-avatar>
-            <v-avatar>
               <v-icon color="primary">
-                place
+                edit
               </v-icon>
             </v-avatar>
           </v-list-tile-avatar>
-          <v-list-tile-title>Obras</v-list-tile-title>
-        </v-list-tile>
-
-        <v-list-tile @click="open = false">
-          <v-list-tile-avatar>
-            <v-avatar>
-              <v-icon color="warning">
-                money_off
-              </v-icon>
-            </v-avatar>
-          </v-list-tile-avatar>
-          <v-list-tile-title>Dar a cuenta</v-list-tile-title>
+          <v-list-tile-title>Editar</v-list-tile-title>
         </v-list-tile>
 
         <v-list-tile @click="open = false">
@@ -57,7 +36,7 @@
 
 <script>
 export default {
-  name: 'VEventOptions',
+  name: 'VEventOptionsEdit',
   data: function() {
     return {
       open: false,
