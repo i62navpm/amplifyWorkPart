@@ -3,36 +3,53 @@
     row
     wrap
   >
-    <v-flex
-      xs12
-      sm6
-    >
-      <v-card-chart-line :data="chartData" />
-    </v-flex>
-    <v-flex
-      xs12
-      sm6
-    >
-      <v-card-chart-pie :data="chartData" />
-    </v-flex>
-
     <v-flex xs12>
-      Container
+      <v-layout
+        row
+        :column="$vuetify.breakpoint.xsOnly"
+        spacer
+      >
+        <v-flex
+          xs12
+          sm4
+          lg3
+        >
+          <v-date-picker
+            v-model="date"
+            class="month-picker"
+            locale="es"
+            show-current
+            full-width
+            type="month"
+          />
+        </v-flex>
+        <v-flex
+          xs12
+          sm8
+          lg9
+        >
+          <v-card-chart-histogram :data="chartData" />
+        </v-flex>
+      </v-layout>
+    </v-flex>
+    <v-flex xs12>
+      <v-card-pdf />
     </v-flex>
   </v-layout>
 </template>
 
 <script>
-import VCardChartLine from '../components/VCardChartLine'
-import VCardChartPie from '../components/VCardChartPie'
+import VCardChartHistogram from '../components/VCardChartHistogram'
+import VCardPdf from '../components/VCardPdf'
 
 export default {
   components: {
-    VCardChartLine,
-    VCardChartPie,
+    VCardChartHistogram,
+    VCardPdf,
   },
   data() {
     return {
+      date: new Date().toISOString().substr(0, 7),
       chartData: {
         columns: ['date', 'cost', 'profit', 'growthRate', 'people'],
         rows: [
@@ -84,3 +101,9 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" scoped>
+.month-picker {
+  height: 100%;
+}
+</style>
