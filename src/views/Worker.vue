@@ -22,10 +22,7 @@
           <v-flex shrink>
             <v-person-avatar :name="'Name Test Surname 1'" />
           </v-flex>
-          <v-flex
-            xs12
-            sm10
-          >
+          <v-flex xs12>
             <span class="display-1 font-weight-light">
               Name Test Surname 1
             </span>
