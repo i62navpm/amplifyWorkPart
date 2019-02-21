@@ -1,6 +1,6 @@
 module.exports = {
   pwa: {
-    name: 'AmplifyWorkPart',
+    name: 'Nóminas',
     themeColor: '#ffc107'
   },
 }
