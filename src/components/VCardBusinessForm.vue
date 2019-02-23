@@ -160,8 +160,8 @@ export default {
       this.$emit('onSubmit', this.company)
       this.loading = false
     },
-    saveImage(url) {
-      this.company.image = url
+    saveImage(key) {
+      this.company.image = key
     },
   },
 }

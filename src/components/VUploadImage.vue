@@ -4,7 +4,43 @@
       slot-scope="{ hover }"
       :class="`elevation-${hover ? 6 : 2}`"
     >
-      <div id="drag-drop-area" />
+      <div v-show="!preview">
+        <div id="drag-drop-area" />
+      </div>
+      <div
+        v-if="preview"
+        class="text-xs-center"
+      >
+        <v-btn
+          icon
+          absolute
+          right
+          class="button--remove-image"
+          @click.native="removeImage"
+        >
+          <v-icon>close</v-icon>
+        </v-btn>
+        <v-img
+          :src="preview"
+          :lazy-src="require('../assets/images/businessDefault.png')"
+          :height="300"
+          contain
+          class="grey lighten-5"
+        >
+          <v-layout
+            slot="placeholder"
+            fill-height
+            align-center
+            justify-center
+            ma-0
+          >
+            <v-progress-circular
+              indeterminate
+              color="primary"
+            />
+          </v-layout>
+        </v-img>
+      </div>
     </v-card>
   </v-hover>
 </template>
@@ -19,6 +55,9 @@ import '@uppy/dashboard/dist/style.css'
 
 export default {
   name: 'VUploadImage',
+  data: function() {
+    return { image: null, preview: null }
+  },
   mounted() {
     const uppy = Uppy({
       autoProceed: false,
@@ -57,15 +96,39 @@ export default {
         facingMode: 'user',
       })
 
-    uppy.on('complete', result => {
-      console.log(
-        'Upload complete! We’ve uploaded these files:',
-        result.successful
-      )
+    uppy.on('file-added', file => (this.image = file))
+    uppy.on('file-removed', file => (this.image = null))
+    uppy.on('complete', result => (this.preview = result.successful[0].preview))
+    uppy.on('upload', async () => {
+      if (this.image) {
+        const { name, type: contentType, data } = this.image
+        try {
+          const { key } = await this.$Amplify.Storage.put(name, data, {
+            contentType,
+          })
+          this.$emit('onUploadImage', key)
+          uppy.reset()
+        } catch (err) {
+          uppy.reset()
+          uppy.info(err, 'error')
+        }
+      }
     })
+  },
+  methods: {
+    removeImage() {
+      this.preview = null
+      this.$emit('onUploadImage', null)
+    },
   },
 }
 </script>
 
 
 
+
+<style lang="scss" scoped>
+.button--remove-image {
+  z-index: 10;
+}
+</style>
