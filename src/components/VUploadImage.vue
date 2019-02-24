@@ -1,62 +1,68 @@
 <template>
-  <v-hover>
-    <v-card
-      slot-scope="{ hover }"
-      :class="`elevation-${hover ? 6 : 2}`"
+  <div>
+    <div v-show="!image">
+      <div id="drag-drop-area" />
+    </div>
+    <div
+      v-if="image"
+      class="text-xs-center"
     >
-      <div v-show="!preview">
-        <div id="drag-drop-area" />
-      </div>
-      <div
-        v-if="preview"
-        class="text-xs-center"
+      <v-btn
+        icon
+        absolute
+        right
+        class="button--remove-image"
+        @click.native="setImage(null)"
       >
-        <v-btn
-          icon
-          absolute
-          right
-          class="button--remove-image"
-          @click.native="removeImage"
-        >
-          <v-icon>close</v-icon>
-        </v-btn>
-        <v-img
-          :src="preview"
-          :lazy-src="require('../assets/images/businessDefault.png')"
-          :height="300"
-          contain
-          class="grey lighten-5"
-        >
-          <v-layout
-            slot="placeholder"
-            fill-height
-            align-center
-            justify-center
-            ma-0
-          >
-            <v-progress-circular
-              indeterminate
-              color="primary"
-            />
-          </v-layout>
-        </v-img>
-      </div>
-    </v-card>
-  </v-hover>
+        <v-icon>close</v-icon>
+      </v-btn>
+      <v-img
+        :src="image"
+        :lazy-src="defaultImage"
+        :height="300"
+        contain
+        class="grey lighten-5"
+      />
+    </div>
+    <div
+      v-if="loading"
+      class="image-spinner--loading"
+    >
+      <v-layout
+        fill-height
+        align-center
+        justify-center
+        ma-0
+      >
+        <v-progress-circular
+          indeterminate
+          color="primary"
+        />
+      </v-layout>
+    </div>
+  </div>
 </template>
 
 <script>
 import Uppy from '@uppy/core'
 import Dashboard from '@uppy/dashboard'
 import Webcam from '@uppy/webcam'
+import defaultImage from '../assets/images/businessDefault.png'
 import '@uppy/core/dist/style.css'
 import '@uppy/webcam/dist/style.css'
 import '@uppy/dashboard/dist/style.css'
 
 export default {
   name: 'VUploadImage',
-  data: function() {
-    return { image: null, preview: null }
+  props: {
+    image: {
+      type: String,
+      required: false,
+      default: '',
+    },
+  },
+  data() {
+    return { defaultImage, loading: false }
   },
   mounted() {
     const uppy = Uppy({
@@ -96,38 +102,51 @@ export default {
         facingMode: 'user',
       })
 
-    uppy.on('file-added', file => (this.image = file))
-    uppy.on('file-removed', file => (this.image = null))
-    uppy.on('complete', result => (this.preview = result.successful[0].preview))
+    let image
+    uppy.on('file-added', file => (image = file))
+    uppy.on('file-removed', file => (image = null))
     uppy.on('upload', async () => {
-      if (this.image) {
-        const { name, type: contentType, data } = this.image
+      if (image) {
+        this.loading = true
         try {
-          const { key } = await this.$Amplify.Storage.put(name, data, {
-            contentType,
-          })
-          this.$emit('onUploadImage', key)
+          const { key } = await this.putImage(image)
+          const url = await this.getImage(key)
+          this.setImage(url)
           uppy.reset()
         } catch (err) {
-          uppy.reset()
           uppy.info(err, 'error')
+        } finally {
+          this.loading = false
         }
       }
     })
   },
   methods: {
-    removeImage() {
-      this.preview = null
-      this.$emit('onUploadImage', null)
+    putImage(image) {
+      const { id, type: contentType, data } = image
+      return this.$Amplify.Storage.put(id, data, {
+        contentType,
+      })
+    },
+    getImage(key) {
+      return this.$Amplify.Storage.get(key)
+    },
+    setImage(image) {
+      this.$emit('onUploadImage', image)
     },
   },
 }
 </script>
 
-
-
-
 <style lang="scss" scoped>
+.image-spinner--loading {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  background: rgba(255, 255, 255, 0.7);
+  z-index: 9999;
+}
 .button--remove-image {
   z-index: 10;
 }
