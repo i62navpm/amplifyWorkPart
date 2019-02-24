@@ -38,7 +38,12 @@
               lg11
               xl7
             >
-              <v-upload-image @onUploadImage="saveImage" />
+              <v-card class="elevation-2">
+                <v-upload-image
+                  :image="person.image"
+                  @onUploadImage="saveImage"
+                />
+              </v-card>
             </v-flex>
           </v-layout>
           <v-layout wrap>
@@ -154,7 +159,7 @@ export default {
     VUploadImage,
   },
   props: {
-    person: {
+    personData: {
       type: Object,
       required: true,
       default: () => ({}),
@@ -163,12 +168,16 @@ export default {
   data: () => ({
     valid: false,
     loading: false,
+    person: {},
     rules: {
       required: value => !!value || 'Este campo es obligatorio.',
       nif: value =>
         /\d{8}\D/.test(value) || 'El NIF debe tener un formato correcto.',
     },
   }),
+  mounted() {
+    this.person = { ...this.personData }
+  },
   methods: {
     save() {
       if (!this.$refs.form.validate()) {
@@ -178,8 +187,8 @@ export default {
       this.$emit('onSubmit', this.person)
       this.loading = false
     },
-    saveImage(url) {
-      this.person.image = url
+    saveImage(image) {
+      this.$set(this.person, 'image', image)
     },
   },
 }

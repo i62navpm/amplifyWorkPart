@@ -11,7 +11,7 @@
         md8
       >
         <v-card-person-form
-          :person="{}"
+          :person-data="{}"
           @onClose="closeForm"
           @onSubmit="saveForm"
         />
