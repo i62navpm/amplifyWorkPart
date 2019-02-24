@@ -38,7 +38,12 @@
               lg11
               xl7
             >
-              <v-upload-image @onUploadImage="saveImage" />
+              <v-card class="elevation-2">
+                <v-upload-image
+                  :image="company.image"
+                  @onUploadImage="saveImage"
+                />
+              </v-card>
             </v-flex>
           </v-layout>
           <v-layout wrap>
@@ -136,7 +141,7 @@ export default {
     VUploadImage,
   },
   props: {
-    company: {
+    companyData: {
       type: Object,
       required: true,
       default: () => ({}),
@@ -145,12 +150,16 @@ export default {
   data: () => ({
     valid: false,
     loading: false,
+    company: {},
     rules: {
       required: value => !!value || 'Este campo es obligatorio.',
       cif: value =>
         /\D\d{8}/.test(value) || 'El CIF debe tener un formato correcto.',
     },
   }),
+  mounted() {
+    this.company = { ...this.companyData }
+  },
   methods: {
     save() {
       if (!this.$refs.form.validate()) {
@@ -160,8 +169,8 @@ export default {
       this.$emit('onSubmit', this.company)
       this.loading = false
     },
-    saveImage(key) {
-      this.company.image = key
+    saveImage(image) {
+      this.$set(this.company, 'image', image)
     },
   },
 }
@@ -173,4 +182,3 @@ export default {
   margin-top: -64px;
 }
 </style>
-

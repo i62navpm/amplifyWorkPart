@@ -11,7 +11,7 @@
         md8
       >
         <v-card-business-form
-          :company="{}"
+          :company-data="{}"
           @onClose="closeForm"
           @onSubmit="saveForm"
         />
