@@ -17,7 +17,7 @@
     </v-flex>
 
     <v-flex xs12>
-      <v-card-calendar :data="calendarData" />
+      <the-card-calendar :data="calendarData" />
     </v-flex>
   </v-layout>
 </template>
@@ -25,13 +25,13 @@
 <script>
 import VCardChartLine from '../components/VCardChartLine'
 import VCardChartPie from '../components/VCardChartPie'
-import VCardCalendar from '../components/VCardCalendar'
+import TheCardCalendar from '../components/TheCardCalendar'
 
 export default {
   components: {
     VCardChartLine,
     VCardChartPie,
-    VCardCalendar,
+    TheCardCalendar,
   },
   data() {
     return {
