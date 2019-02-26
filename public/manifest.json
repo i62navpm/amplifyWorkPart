@@ -1,6 +1,6 @@
 {
-  "name": "amplifyWorkPart",
-  "short_name": "amplifyWorkPart",
+  "name": "nominasApp",
+  "short_name": "nominasApp",
   "icons": [
     {
       "src": "./img/icons/android-chrome-192x192.png",
