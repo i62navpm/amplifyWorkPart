@@ -1,8 +1,12 @@
 <template>
-  <div class="text-xs-center">
-    <v-bottom-sheet
+  <v-layout
+    row
+    justify-center
+  >
+    <v-dialog
       v-model="open"
-      inset
+      transition="dialog-bottom-transition"
+      :fullscreen="$vuetify.breakpoint.xsOnly"
       lazy
     >
       <v-card>
@@ -23,11 +27,11 @@
             <v-icon>close</v-icon>
           </v-btn>
         </v-toolbar>
-        <v-card-text>
-          <v-form
-            ref="form"
-            v-model="valid"
-          >
+        <v-form
+          ref="form"
+          v-model="valid"
+        >
+          <v-card-text>
             <v-container
               grid-list-xl
               fluid
@@ -113,30 +117,28 @@
                     deletable-chips
                   />
                 </v-flex>
-                <v-flex
-                  xs12
-                  class="text-xs-right"
-                >
-                  <v-btn
-                    :loading="loading"
-                    :disabled="disableButton"
-                    flat
-                    color="primary"
-                    @click.native="agreeClick"
-                  >
-                    <v-icon class="mr-2">
-                      save
-                    </v-icon>
-                    Guardar
-                  </v-btn>
-                </v-flex>
               </v-layout>
             </v-container>
-          </v-form>
-        </v-card-text>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer />
+            <v-btn
+              :loading="loading"
+              :disabled="disableButton"
+              flat
+              color="primary"
+              @click.native="agreeClick"
+            >
+              <v-icon class="mr-2">
+                save
+              </v-icon>
+              Guardar
+            </v-btn>
+          </v-card-actions>
+        </v-form>
       </v-card>
-    </v-bottom-sheet>
-  </div>
+    </v-dialog>
+  </v-layout>
 </template>
 
 <script>
