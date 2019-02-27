@@ -72,7 +72,7 @@ export default {
         }
       })
     },
-    openEventOptions(events = []) {
+    openEventOptionsNew(events = []) {
       setTimeout(() => {
         this.$refs.eventOptionsNew.open = true
         this.$refs.eventOptionsNew.events = events
@@ -94,7 +94,7 @@ export default {
       )
       let events = this.exludeExistEvents(this.events, range)
       events = this.formatEvents(events)
-      events.length && this.openEventOptions(events)
+      events.length && this.openEventOptionsNew(events)
     },
     getRangeDates(start, end) {
       return moment.range(start, end)
