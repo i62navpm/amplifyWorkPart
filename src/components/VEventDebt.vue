@@ -1,94 +1,89 @@
 <template>
-  <v-layout
-    row
-    justify-center
+  <v-dialog
+    v-model="open"
+    transition="dialog-bottom-transition"
+    :fullscreen="$vuetify.breakpoint.xsOnly"
+    lazy
   >
-    <v-dialog
-      v-model="open"
-      transition="dialog-bottom-transition"
-      :fullscreen="$vuetify.breakpoint.xsOnly"
-      lazy
-    >
-      <v-card>
-        <v-toolbar
-          card
-          dense
+    <v-card>
+      <v-toolbar
+        card
+        dense
+      >
+        <v-toolbar-title>
+          <span class="subheading">
+            Dar a cuenta
+          </span>
+        </v-toolbar-title>
+        <v-spacer />
+        <v-btn
+          icon
+          @click.native="closeEvent"
         >
-          <v-toolbar-title>
-            <span class="subheading">
-              Dar a cuenta
-            </span>
-          </v-toolbar-title>
+          <v-icon>close</v-icon>
+        </v-btn>
+      </v-toolbar>
+      <v-form
+        ref="form"
+        v-model="valid"
+      >
+        <v-card-text>
+          <v-container
+            grid-list-xl
+            fluid
+          >
+            <v-layout wrap>
+              <v-flex
+                xs12
+                text-xs-center
+                :class="`${color}--text text--darken-2 text-truncate`"
+              >
+                <span
+                  class="display-4 font-weight-regular"
+                  v-text="debt"
+                />
+                <span class="subheading font-weight-light mr-1">
+                  <v-icon x-large>
+                    euro_symbol
+                  </v-icon>
+                </span>
+              </v-flex>
+              <v-flex xs12>
+                <v-text-field
+                  v-model="debt"
+                  type="number"
+                  label="Introduzca un importe para dar a cuenta"
+                />
+              </v-flex>
+              <v-flex xs12>
+                <v-textarea
+                  v-model="description"
+                  auto-grow
+                  box
+                  label="Descripción"
+                />
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </v-card-text>
+        <v-card-actions>
           <v-spacer />
           <v-btn
-            icon
-            @click.native="closeEvent"
+            :loading="loading"
+            :disabled="disableButton"
+            flat
+            color="primary"
+            @click.native="agreeClick"
           >
-            <v-icon>close</v-icon>
+            <v-icon class="mr-2">
+              save
+            </v-icon>
+            Guardar
           </v-btn>
-        </v-toolbar>
-        <v-form
-          ref="form"
-          v-model="valid"
-        >
-          <v-card-text>
-            <v-container
-              grid-list-xl
-              fluid
-            >
-              <v-layout wrap>
-                <v-flex
-                  xs12
-                  text-xs-center
-                  :class="`${color}--text text--darken-2 text-truncate`"
-                >
-                  <span
-                    class="display-4 font-weight-regular"
-                    v-text="debt"
-                  />
-                  <span class="subheading font-weight-light mr-1">
-                    <v-icon x-large>
-                      euro_symbol
-                    </v-icon>
-                  </span>
-                </v-flex>
-                <v-flex xs12>
-                  <v-text-field
-                    v-model="debt"
-                    type="number"
-                    label="Introduzca un importe para dar a cuenta"
-                  />
-                </v-flex>
-                <v-flex xs12>
-                  <v-textarea
-                    v-model="description"
-                    auto-grow
-                    box
-                    label="Descripción"
-                  />
-                </v-flex>
-              </v-layout>
-            </v-container>
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer />
-            <v-btn
-              :loading="loading"
-              :disabled="disableButton"
-              flat
-              color="primary"
-              @click.native="agreeClick"
-            >
-              <v-icon class="mr-2">
-                save
-              </v-icon>
-              Guardar
-            </v-btn>
-          </v-card-actions>
-        </v-form>
-      </v-card>
-    </v-dialog>
-  </v-layout>
+        </v-card-actions>
+      </v-form>
+    </v-card>
+  </v-dialog>
 </template>
 
 <script>
