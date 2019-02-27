@@ -1,5 +1,5 @@
 <template>
-<v-dialog
+  <v-dialog
     v-model="open"
     transition="dialog-bottom-transition"
     :fullscreen="$vuetify.breakpoint.xsOnly"
