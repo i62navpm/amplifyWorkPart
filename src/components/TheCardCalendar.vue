@@ -78,14 +78,14 @@ export default {
         this.$refs.eventOptionsNew.events = events
       }, 100)
     },
-    openEventOptionsEdit(events = []) {
+    openEventOptionsEdit(event) {
       setTimeout(() => {
         this.$refs.eventOptionsEdit.open = true
-        this.$refs.eventOptionsEdit.events = events
+        this.$refs.eventOptionsEdit.event = event
       }, 100)
     },
     eventSelected(event) {
-      this.openEventOptionsEdit([event])
+      this.openEventOptionsEdit(event)
     },
     eventCreated(event) {
       const range = this.getRangeDates(
