@@ -20,6 +20,18 @@
           </v-flex>
         </v-layout>
       </v-flex>
+      <v-btn
+        fixed
+        dark
+        fab
+        bottom
+        right
+        large
+        color="pink"
+        :to="{name: 'company'}"
+      >
+        <v-icon>add</v-icon>
+      </v-btn>
     </v-layout>
   </v-container>
 </template>
