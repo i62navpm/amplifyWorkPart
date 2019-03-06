@@ -1,7 +1,13 @@
 <template>
   <div>
-    <v-event-pay ref="eventPay" />
-    <v-event-debt ref="eventDebt" />
+    <v-event-pay
+      ref="eventPay"
+      :event="eventDateRange"
+    />
+    <v-event-debt
+      ref="eventDebt"
+      :event="eventDateRange"
+    />
     <v-confirm-modal
       ref="deleteModal"
       @onAccept="deleteEvent"
@@ -53,6 +59,12 @@ export default {
       open: false,
       event: {},
     }
+  },
+  computed: {
+    eventDateRange() {
+      const { start } = this.event
+      return { start, end: start }
+    },
   },
   methods: {
     openEventPay() {

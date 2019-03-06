@@ -33,6 +33,12 @@
             fluid
           >
             <v-layout wrap>
+              <v-subheader>
+                <v-icon class="mr-2">
+                  calendar_today
+                </v-icon>
+                {{ eventsRangeDates }}
+              </v-subheader>
               <v-flex
                 xs12
                 text-xs-center
@@ -163,6 +169,14 @@ export default {
     }
   },
   computed: {
+    eventsRangeDates() {
+      let { start, end } = this.event
+
+      start = new Date(start).toLocaleDateString()
+      end = new Date(end).toLocaleDateString()
+
+      return start === end ? `Dia ${start}` : `Del día ${start} al día ${end}`
+    },
     color() {
       if (this.salary >= this.maxSalary) return 'green'
       if (this.salary > this.minSalary) return 'orange'

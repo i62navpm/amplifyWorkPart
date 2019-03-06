@@ -1,7 +1,13 @@
 <template>
   <div>
-    <v-event-pay ref="eventPay" />
-    <v-event-debt ref="eventDebt" />
+    <v-event-pay
+      ref="eventPay"
+      :event="eventDateRange"
+    />
+    <v-event-debt
+      ref="eventDebt"
+      :event="eventDateRange"
+    />
     <v-bottom-sheet
       v-model="open"
       inset
@@ -48,6 +54,14 @@ export default {
       open: false,
       events: [],
     }
+  },
+  computed: {
+    eventDateRange() {
+      const [{ start } = {}, ...rest] = this.events
+      const [{ start: end } = {}] = this.events.slice(-1)
+
+      return { start, end }
+    },
   },
   methods: {
     openEventPay() {
