@@ -26,7 +26,6 @@
         fab
         bottom
         right
-        large
         color="pink"
         :to="{name: 'company'}"
       >
