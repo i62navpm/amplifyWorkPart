@@ -1,6 +1,7 @@
 <template>
   <v-dialog
     v-model="open"
+    max-width="800"
     transition="dialog-bottom-transition"
     :fullscreen="$vuetify.breakpoint.xsOnly"
     lazy
