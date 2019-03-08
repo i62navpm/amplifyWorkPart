@@ -50,6 +50,7 @@ export default {
     return {
       events: [],
       config: {
+        height: 650,
         header: { left: 'title', center: '', right: 'today prev,next' },
         buttonText: { today: 'Hoy' },
         editable: false,
