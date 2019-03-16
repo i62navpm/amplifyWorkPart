@@ -36,21 +36,27 @@
 </template>
 
 <script>
+import loadingMixin from '../mixins/loading.js'
+
 export default {
   name: 'VConfirmModal',
+  mixins: [loadingMixin],
   data: function() {
     return {
       open: false,
-      loading: false,
     }
   },
   methods: {
-    async agreeClick() {
-      this.loading = true
-      await this.$emit('onAccept', () => {
-        this.loading = false
-        this.open = false
-      })
+    agreeClick() {
+      this.startLoading()
+      this.$emit('onAccept', this.stopLoadingAndClose)
+    },
+    stopLoadingAndClose() {
+      this.stopLoading()
+      this.closeDialog()
+    },
+    closeDialog() {
+      this.open = false
     },
   },
 }
