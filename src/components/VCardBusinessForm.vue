@@ -64,7 +64,7 @@
             >
               <v-text-field
                 v-model="company.cif"
-                :rules="[rules.required, rules.cif]"
+                :rules="[rules.cif]"
                 label="Cif"
                 mask="A-########"
                 validate-on-blur
@@ -117,7 +117,7 @@
                 :loading="loading"
                 flat
                 color="primary"
-                @click="save"
+                @click.native="submit"
               >
                 <v-icon class="mr-2">
                   save
@@ -134,12 +134,14 @@
 
 <script>
 import VUploadImage from './VUploadImage'
+import loadingMixin from '../mixins/loading.js'
 
 export default {
   name: 'VCardBusinessForm',
   components: {
     VUploadImage,
   },
+  mixins: [loadingMixin],
   props: {
     companyData: {
       type: Object,
@@ -149,25 +151,25 @@ export default {
   },
   data: () => ({
     valid: false,
-    loading: false,
     company: {},
     rules: {
       required: value => !!value || 'Este campo es obligatorio.',
       cif: value =>
-        /\D\d{8}/.test(value) || 'El CIF debe tener un formato correcto.',
+        !!value &&
+        (/\D\d{8}/.test(value) || 'El CIF debe tener un formato correcto.'),
     },
   }),
   mounted() {
     this.company = { ...this.companyData }
   },
   methods: {
-    save() {
+    submit() {
       if (!this.$refs.form.validate()) {
         return
       }
-      this.loading = true
-      this.$emit('onSubmit', this.company)
-      this.loading = false
+
+      this.startLoading()
+      this.$emit('onSubmit', this.stopLoading)
     },
     saveImage(image) {
       this.$set(this.company, 'image', image)
