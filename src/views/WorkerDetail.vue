@@ -14,14 +14,7 @@
           sm4
           lg3
         >
-          <v-date-picker
-            v-model="date"
-            class="month-picker"
-            locale="es"
-            show-current
-            full-width
-            type="month"
-          />
+          <v-month-picker />
         </v-flex>
         <v-flex
           xs12
@@ -41,15 +34,16 @@
 <script>
 import VCardChartHistogram from '../components/VCardChartHistogram'
 import VCardPdf from '../components/VCardPdf'
+import VMonthPicker from '../components/VMonthPicker'
 
 export default {
   components: {
     VCardChartHistogram,
     VCardPdf,
+    VMonthPicker,
   },
   data() {
     return {
-      date: new Date().toISOString().substr(0, 7),
       chartData: {
         columns: ['date', 'cost', 'profit', 'growthRate', 'people'],
         rows: [
@@ -101,9 +95,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss" scoped>
-.month-picker {
-  height: 100%;
-}
-</style>
