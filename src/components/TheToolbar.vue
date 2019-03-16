@@ -14,7 +14,15 @@
       </router-link>
     </v-toolbar-title>
     <v-spacer />
-    <v-card-user :data="attributes" />
+    <v-progress-circular
+      v-if="$store.getters.getLoading"
+      indeterminate
+      color="primary"
+    />
+    <v-card-user
+      v-else
+      :data="attributes"
+    />
   </v-toolbar>
 </template>
 
