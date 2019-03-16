@@ -130,7 +130,7 @@
             :disabled="disableButton"
             flat
             color="primary"
-            @click.native="agreeClick"
+            @click.native="subtmi"
           >
             <v-icon class="mr-2">
               save
@@ -144,8 +144,11 @@
 </template>
 
 <script>
+import loadingMixin from '../mixins/loading.js'
+
 export default {
   name: 'VEventPay',
+  mixins: [loadingMixin],
   props: {
     event: {
       type: Object,
@@ -157,7 +160,6 @@ export default {
     return {
       open: false,
       valid: false,
-      loading: false,
       rangeSalary: 60,
       customSalary: 60,
       ticksLabels: ['Salario mínimo', 'Salario máximo'],
@@ -193,12 +195,17 @@ export default {
     },
   },
   methods: {
-    agreeClick() {
-      this.loading = true
-      this.$emit('onAccept', () => {
-        this.loading = false
-        this.closeEvent()
-      })
+    subtmi() {
+      if (!this.$refs.form.validate()) {
+        return
+      }
+
+      this.startLoading()
+      this.$emit('onSubmit', this.stopLoadingAndClose)
+    },
+    stopLoadingAndClose() {
+      this.stopLoading()
+      this.closeEvent()
     },
     closeEvent() {
       this.open = false

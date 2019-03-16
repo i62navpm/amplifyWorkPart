@@ -3,10 +3,12 @@
     <v-event-pay
       ref="eventPay"
       :event="eventDateRange"
+      @onSubmit="saveForm"
     />
     <v-event-debt
       ref="eventDebt"
       :event="eventDateRange"
+      @onSubmit="saveForm"
     />
     <v-bottom-sheet
       v-model="open"
@@ -75,12 +77,8 @@ export default {
     closeSheet() {
       this.open = false
     },
-    async agreeClick() {
-      this.loading = true
-      await this.$emit('onAccept', () => {
-        this.loading = false
-        this.closeSheet()
-      })
+    saveForm(callback) {
+      return new Promise(success => setTimeout(() => success(callback()), 4000))
     },
   },
 }

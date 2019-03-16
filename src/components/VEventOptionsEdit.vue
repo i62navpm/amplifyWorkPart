@@ -3,10 +3,12 @@
     <v-event-pay
       ref="eventPay"
       :event="eventDateRange"
+      @onSubmit="saveForm"
     />
     <v-event-debt
       ref="eventDebt"
       :event="eventDateRange"
+      @onSubmit="saveForm"
     />
     <v-confirm-modal
       ref="deleteModal"
@@ -83,23 +85,15 @@ export default {
     closeSheet() {
       this.open = false
     },
-    async agreeClick() {
-      this.loading = true
-      await this.$emit('onAccept', () => {
-        this.loading = false
-        this.closeSheet()
-      })
-    },
     showModalDeleteEvent() {
       this.$refs.deleteModal.open = true
     },
     deleteEvent(callback) {
       this.closeSheet()
-      return new Promise(success => {
-        setTimeout(() => {
-          success(callback())
-        }, 4000)
-      })
+      return new Promise(success => setTimeout(() => success(callback()), 4000))
+    },
+    saveForm(callback) {
+      return new Promise(success => setTimeout(() => success(callback()), 4000))
     },
   },
 }
