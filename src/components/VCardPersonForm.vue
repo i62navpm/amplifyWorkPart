@@ -64,7 +64,7 @@
             >
               <v-text-field
                 v-model="person.nif"
-                :rules="[rules.required, rules.nif]"
+                :rules="[rules.nif]"
                 label="Nif"
                 mask="########-A"
                 validate-on-blur
@@ -111,6 +111,7 @@
             >
               <v-text-field
                 v-model="person.fullSalary"
+                :rules="[rules.required]"
                 append-outer-icon="euro"
                 type="number"
                 label="Salario completo"
@@ -122,6 +123,7 @@
             >
               <v-text-field
                 v-model="person.halfSalary"
+                :rules="[rules.required]"
                 append-outer-icon="euro"
                 type="number"
                 label="Salario reducido"
@@ -135,7 +137,7 @@
                 :loading="loading"
                 flat
                 color="primary"
-                @click="save"
+                @click.native="submit"
               >
                 <v-icon class="mr-2">
                   save
@@ -152,12 +154,14 @@
 
 <script>
 import VUploadImage from './VUploadImage'
+import loadingMixin from '../mixins/loading.js'
 
 export default {
   name: 'VCardPersonForm',
   components: {
     VUploadImage,
   },
+  mixins: [loadingMixin],
   props: {
     personData: {
       type: Object,
@@ -172,20 +176,21 @@ export default {
     rules: {
       required: value => !!value || 'Este campo es obligatorio.',
       nif: value =>
-        /\d{8}\D/.test(value) || 'El NIF debe tener un formato correcto.',
+        !!value &&
+        (/\d{8}\D/.test(value) || 'El NIF debe tener un formato correcto.'),
     },
   }),
   mounted() {
     this.person = { ...this.personData }
   },
   methods: {
-    save() {
+    submit() {
       if (!this.$refs.form.validate()) {
         return
       }
-      this.loading = true
-      this.$emit('onSubmit', this.person)
-      this.loading = false
+
+      this.startLoading()
+      this.$emit('onSubmit', this.stopLoading)
     },
     saveImage(image) {
       this.$set(this.person, 'image', image)

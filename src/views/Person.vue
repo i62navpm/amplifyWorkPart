@@ -31,8 +31,8 @@ export default {
     closeForm() {
       this.$router.push({ name: 'people' })
     },
-    saveForm(data) {
-      console.log(data)
+    saveForm(callback) {
+      return new Promise(success => setTimeout(() => success(callback()), 4000))
     },
   },
 }
