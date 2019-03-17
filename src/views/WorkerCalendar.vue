@@ -39,7 +39,7 @@
             spacer
           >
             <v-flex>
-              <v-month-picker />
+              <v-month-picker @onChange="onMonthChange" />
             </v-flex>
             <v-flex>
               <v-card-debt-detail :debt="4400" />
@@ -52,7 +52,10 @@
           sm8
           lg9
         >
-          <the-card-calendar :data="calendarData" />
+          <the-card-calendar
+            ref="calendar"
+            :data="calendarData"
+          />
         </v-flex>
       </v-layout>
     </v-flex>
@@ -65,6 +68,7 @@ import VCardChartPie from '../components/VCardChartPie'
 import TheCardCalendar from '../components/TheCardCalendar'
 import VMonthPicker from '../components/VMonthPicker'
 import VCardDebtDetail from '../components/VCardDebtDetail'
+import moment from 'moment'
 
 export default {
   components: {
@@ -146,6 +150,16 @@ export default {
         ],
       },
     }
+  },
+  computed: {
+    calendar() {
+      return this.$refs.calendar.$refs.fullCalendar
+    },
+  },
+  methods: {
+    onMonthChange(month) {
+      this.calendar.fireMethod('gotoDate', moment(month))
+    },
   },
 }
 </script>

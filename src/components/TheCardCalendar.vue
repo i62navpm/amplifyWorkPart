@@ -11,6 +11,7 @@
     <v-card>
       <v-card-text>
         <full-calendar
+          ref="fullCalendar"
           :events="events"
           :config="config"
           default-view="month"
