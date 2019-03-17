@@ -3,21 +3,58 @@
     row
     wrap
   >
-    <v-flex
-      xs12
-      sm6
-    >
-      <v-card-chart-line :data="chartData" />
-    </v-flex>
-    <v-flex
-      xs12
-      sm6
-    >
-      <v-card-chart-pie :data="chartData" />
-    </v-flex>
-
     <v-flex xs12>
-      <the-card-calendar :data="calendarData" />
+      <v-layout
+        row
+        :column="$vuetify.breakpoint.xsOnly"
+        spacer
+      >
+        <v-flex
+          xs12
+          sm6
+        >
+          <v-card-chart-line :data="chartData" />
+        </v-flex>
+        <v-flex
+          xs12
+          sm6
+        >
+          <v-card-chart-pie :data="chartData" />
+        </v-flex>
+      </v-layout>
+    </v-flex>
+    <v-flex xs12>
+      <v-layout
+        row
+        :column="$vuetify.breakpoint.xsOnly"
+        spacer
+      >
+        <v-flex
+          xs12
+          sm4
+          lg3
+        >
+          <v-layout
+            column
+            spacer
+          >
+            <v-flex>
+              <v-month-picker />
+            </v-flex>
+            <v-flex>
+              <v-card-debt-detail :debt="4400" />
+            </v-flex>
+          </v-layout>
+        </v-flex>
+
+        <v-flex
+          xs12
+          sm8
+          lg9
+        >
+          <the-card-calendar :data="calendarData" />
+        </v-flex>
+      </v-layout>
     </v-flex>
   </v-layout>
 </template>
@@ -26,12 +63,16 @@
 import VCardChartLine from '../components/VCardChartLine'
 import VCardChartPie from '../components/VCardChartPie'
 import TheCardCalendar from '../components/TheCardCalendar'
+import VMonthPicker from '../components/VMonthPicker'
+import VCardDebtDetail from '../components/VCardDebtDetail'
 
 export default {
   components: {
     VCardChartLine,
     VCardChartPie,
     TheCardCalendar,
+    VCardDebtDetail,
+    VMonthPicker,
   },
   data() {
     return {
