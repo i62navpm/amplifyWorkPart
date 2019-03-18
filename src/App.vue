@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <the-toolbar v-if="user" />
+    <the-notification />
     <v-content>
       <transition
         name="fade"
@@ -14,11 +15,13 @@
 
 <script>
 import TheToolbar from './components/TheToolbar'
+import TheNotification from './components/TheNotification'
 
 export default {
   name: 'App',
   components: {
     TheToolbar,
+    TheNotification,
   },
   computed: {
     user() {
