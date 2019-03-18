@@ -52,10 +52,12 @@
 import VEventPay from './VEventPay'
 import VEventDebt from './VEventDebt'
 import VConfirmModal from './VConfirmModal'
+import notification from '../mixins/notification'
 
 export default {
   name: 'VEventOptionsEdit',
   components: { VEventPay, VEventDebt, VConfirmModal },
+  mixins: [notification],
   data: function() {
     return {
       open: false,
@@ -90,10 +92,28 @@ export default {
     },
     deleteEvent(callback) {
       this.closeSheet()
-      return new Promise(success => setTimeout(() => success(callback()), 4000))
+      return new Promise(success =>
+        setTimeout(() => {
+          try {
+            this.notifySuccess('Evento eliminado correctamente')
+            success(callback())
+          } catch ({ message = '' }) {
+            this.notifyError(message)
+          }
+        }, 4000)
+      )
     },
     saveForm(callback) {
-      return new Promise(success => setTimeout(() => success(callback()), 4000))
+      return new Promise(success =>
+        setTimeout(() => {
+          try {
+            this.notifySuccess('Evento editado correctamente')
+            success(callback())
+          } catch ({ message = '' }) {
+            this.notifyError(message)
+          }
+        }, 4000)
+      )
     },
   },
 }

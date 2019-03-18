@@ -47,10 +47,12 @@
 <script>
 import VEventPay from './VEventPay'
 import VEventDebt from './VEventDebt'
+import notification from '../mixins/notification'
 
 export default {
   name: 'VEventOptionsNew',
   components: { VEventPay, VEventDebt },
+  mixins: [notification],
   data: function() {
     return {
       open: false,
@@ -59,7 +61,7 @@ export default {
   },
   computed: {
     eventDateRange() {
-      const [{ start } = {}, ...rest] = this.events
+      const [{ start } = {}] = this.events
       const [{ start: end } = {}] = this.events.slice(-1)
 
       return { start, end }
@@ -78,7 +80,16 @@ export default {
       this.open = false
     },
     saveForm(callback) {
-      return new Promise(success => setTimeout(() => success(callback()), 4000))
+      return new Promise(success =>
+        setTimeout(() => {
+          try {
+            this.notifySuccess('Evento creado correctamente')
+            success(callback())
+          } catch ({ message = '' }) {
+            this.notifyError(message)
+          }
+        }, 4000)
+      )
     },
   },
 }

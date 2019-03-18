@@ -62,10 +62,12 @@
 
 <script>
 import VConfirmModal from './VConfirmModal'
+import notification from '../mixins/notification'
 
 export default {
   name: 'VCardBusiness',
   components: { VConfirmModal },
+  mixins: [notification],
   props: {
     company: {
       type: Object,
@@ -78,11 +80,16 @@ export default {
       this.$refs.deleteModal.open = true
     },
     deleteBusiness(callback) {
-      return new Promise(success => {
+      return new Promise(success =>
         setTimeout(() => {
-          success(callback())
+          try {
+            this.notifySuccess('Empresa eliminada correctamente')
+            success(callback())
+          } catch ({ message = '' }) {
+            this.notifyError(message)
+          }
         }, 4000)
-      })
+      )
     },
   },
 }

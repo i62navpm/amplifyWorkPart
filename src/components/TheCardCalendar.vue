@@ -1,13 +1,7 @@
 <template>
   <div>
-    <v-event-options-new
-      ref="eventOptionsNew"
-      @onAccept="saveEvent"
-    />
-    <v-event-options-edit
-      ref="eventOptionsEdit"
-      @onAccept="saveEvent"
-    />
+    <v-event-options-new ref="eventOptionsNew" />
+    <v-event-options-edit ref="eventOptionsEdit" />
     <v-card>
       <v-card-text>
         <full-calendar
@@ -29,6 +23,7 @@ import { extendMoment } from 'moment-range'
 import { FullCalendar } from 'vue-full-calendar'
 import VEventOptionsNew from './VEventOptionsNew'
 import VEventOptionsEdit from './VEventOptionsEdit'
+import notification from '../mixins/notification'
 import 'fullcalendar/dist/fullcalendar.css'
 
 const moment = extendMoment(Moment)
@@ -40,6 +35,7 @@ export default {
     VEventOptionsNew,
     VEventOptionsEdit,
   },
+  mixins: [notification],
   props: {
     data: {
       type: Array,
@@ -108,13 +104,6 @@ export default {
     },
     formatEvents(events) {
       return events.map(event => ({ start: event.format() }))
-    },
-    saveEvent(callback) {
-      return new Promise(success => {
-        setTimeout(() => {
-          success(callback())
-        }, 4000)
-      })
     },
   },
 }

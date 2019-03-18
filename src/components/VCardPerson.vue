@@ -76,10 +76,12 @@
 <script>
 import VPersonAvatar from './VPersonAvatar'
 import VConfirmModal from './VConfirmModal'
+import notification from '../mixins/notification'
 
 export default {
   name: 'VCardPerson',
   components: { VPersonAvatar, VConfirmModal },
+  mixins: [notification],
   props: {
     person: {
       type: Object,
@@ -87,21 +89,21 @@ export default {
       default: () => ({}),
     },
   },
-  computed: {
-    avatar() {
-      return avatar(this.person.name || '')
-    },
-  },
   methods: {
     showModalDeletePerson() {
       this.$refs.deleteModal.open = true
     },
     deletePerson(callback) {
-      return new Promise(success => {
+      return new Promise(success =>
         setTimeout(() => {
-          success(callback())
+          try {
+            this.notifySuccess('Empleado eliminado correctamente')
+            success(callback())
+          } catch ({ message = '' }) {
+            this.notifyError(message)
+          }
         }, 4000)
-      })
+      )
     },
   },
 }

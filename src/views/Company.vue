@@ -22,17 +22,28 @@
 
 <script>
 import VCardBusinessForm from '../components/VCardBusinessForm'
+import notification from '../mixins/notification'
 
 export default {
   components: {
     VCardBusinessForm,
   },
+  mixins: [notification],
   methods: {
     closeForm() {
       this.$router.push({ name: 'home' })
     },
     saveForm(callback) {
-      return new Promise(success => setTimeout(() => success(callback()), 4000))
+      return new Promise(success =>
+        setTimeout(() => {
+          try {
+            this.notifySuccess('Empresa guardada correctamente')
+            success(callback())
+          } catch ({ message = '' }) {
+            this.notifyError(message)
+          }
+        }, 4000)
+      )
     },
   },
 }

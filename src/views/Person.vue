@@ -22,17 +22,28 @@
 
 <script>
 import VCardPersonForm from '../components/VCardPersonForm'
+import notification from '../mixins/notification'
 
 export default {
   components: {
     VCardPersonForm,
   },
+  mixins: [notification],
   methods: {
     closeForm() {
       this.$router.push({ name: 'people' })
     },
     saveForm(callback) {
-      return new Promise(success => setTimeout(() => success(callback()), 4000))
+      return new Promise(success =>
+        setTimeout(() => {
+          try {
+            this.notifySuccess('Empleado guardado correctamente')
+            success(callback())
+          } catch ({ message = '' }) {
+            this.notifyError(message)
+          }
+        }, 4000)
+      )
     },
   },
 }
