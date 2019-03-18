@@ -104,7 +104,7 @@ export default {
 
     let image
     uppy.on('file-added', file => (image = file))
-    uppy.on('file-removed', file => (image = null))
+    uppy.on('file-removed', () => (image = null))
     uppy.on('upload', async () => {
       if (image) {
         this.loading = true
