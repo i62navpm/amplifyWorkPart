@@ -1,8 +1,9 @@
 <template>
   <v-snackbar
-    v-model="notification.show"
+    :value="notification.show"
     :color="notification.color"
     multi-line
+    @input="onChange"
   >
     {{ notification.message }}
     <v-btn
@@ -21,6 +22,11 @@ export default {
   computed: {
     notification() {
       return this.$store.getters.getNotification
+    },
+  },
+  methods: {
+    onChange() {
+      this.$store.dispatch('closeNotification')
     },
   },
 }
