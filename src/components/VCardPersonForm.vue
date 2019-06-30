@@ -68,7 +68,6 @@
                 label="Nif"
                 mask="########-A"
                 validate-on-blur
-                required
               />
             </v-flex>
             <v-flex
