@@ -68,7 +68,6 @@
                 label="Cif"
                 mask="A-########"
                 validate-on-blur
-                required
               />
             </v-flex>
             <v-flex
