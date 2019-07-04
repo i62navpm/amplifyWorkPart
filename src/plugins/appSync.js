@@ -27,6 +27,9 @@ const client = new AWSAppSyncClient(config, options)
 
 const apolloProvider = new VueApollo({
   defaultClient: client,
+  watchLoading(isLoading) {
+    this.$store.dispatch(isLoading ? 'startLoading' : 'stopLoading')
+  },
 })
 
 Vue.use(VueApollo)
