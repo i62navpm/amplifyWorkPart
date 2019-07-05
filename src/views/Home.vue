@@ -15,9 +15,21 @@
           column
           wrap
         >
-          <v-flex>
-            <v-card-business :company="{}" />
-          </v-flex>
+          <v-load-data
+            :loading="$apollo.queries.listCompanys.loading"
+            :show-no-results="!listCompanys.items.length"
+          >
+            <template v-slot:noData>
+              Aún no se ha creado ninguna empresa
+            </template>
+
+            <v-flex
+              v-for="company in listCompanys.items"
+              :key="company.id"
+            >
+              <v-card-business :company="company" />
+            </v-flex>
+          </v-load-data>
         </v-layout>
       </v-flex>
       <v-btn
@@ -36,13 +48,23 @@
 </template>
 
 <script>
+import gql from 'graphql-tag'
 import TheBreadcrums from '../components/TheBreadcrums'
 import VCardBusiness from '../components/VCardBusiness'
+import VLoadData from '../components/VLoadData'
+import { listCompanys } from '../graphql/queries'
 
 export default {
   components: {
     TheBreadcrums,
     VCardBusiness,
+    VLoadData,
+  },
+  data() {
+    return { listCompanys: { items: [] } }
+  },
+  apollo: {
+    listCompanys: gql(listCompanys),
   },
 }
 </script>
