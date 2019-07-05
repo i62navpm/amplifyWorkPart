@@ -14,17 +14,19 @@
       </router-link>
     </v-toolbar-title>
     <v-spacer />
-    <v-fade-transition leave-absolute>
-      <v-progress-circular
-        v-if="$store.getters.getLoading"
-        indeterminate
-        color="primary"
-      />
-      <v-card-user
-        v-else
-        :data="attributes"
-      />
-    </v-fade-transition>
+    <span v-if="$store.getters.getLoading">
+      <v-fade-transition leave-absolute>
+        <v-progress-circular
+          indeterminate
+          leave-absolute
+          color="primary"
+        />
+      </v-fade-transition>
+    </span>
+    <v-card-user
+      v-else
+      :data="attributes"
+    />
   </v-toolbar>
 </template>
 
