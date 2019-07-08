@@ -21,7 +21,7 @@
     >
       <div class="title font-weight-light text-xs-center py-5">
         <slot name="noData">
-          Aun no hay nada creado
+          Aún no hay nada creado
         </slot>
       </div>
     </div>
