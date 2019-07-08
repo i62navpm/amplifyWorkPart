@@ -27,7 +27,7 @@
     </div>
 
     <slot v-else />
-</transition>
+  </transition>
 </template>
 
 <script>
