@@ -4,12 +4,6 @@ import store from '../store'
 import router from '../router'
 
 const authAction = {
-  signUp: async ({ userSub, user: { username = '' } = {} }) => {
-    await createUserInDb({
-      id: userSub,
-      email: username,
-    })
-  },
   signIn: async user => {
     !(await existUserInDb(user.username)) &&
       (await createUserInDb({
