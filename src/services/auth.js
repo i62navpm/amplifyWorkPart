@@ -5,12 +5,13 @@ import router from '../router'
 
 const authAction = {
   signIn: async user => {
-    !(await existUserInDb(user.username)) &&
+    const { username, attributes } = user
+    !(await existUserInDb(username)) &&
       (await createUserInDb({
-        id: user.username,
-        email: user.attributes.email,
+        id: username,
+        email: attributes.email,
       }))
-    store.commit('setUser', user)
+    store.commit('setUser', { username, attributes })
     router.push({ name: 'home' })
   },
   signOut: () => {

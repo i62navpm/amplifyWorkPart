@@ -1,0 +1,54 @@
+type User {
+  id: ID!
+  email: String!
+  business(first: Int, after: String): BusinessConnection
+}
+
+type Business {
+  id: ID!
+  userId: ID!
+  user: User
+  employees(first: Int, after: String): EmployeeConnection
+  name: String!
+  cif: String
+  date: String
+  address: String
+  phone: String
+  email: String
+  web: String
+  image: String
+}
+
+type Employee {
+  id: ID!
+  businessId: ID!
+  name: String!
+  nif: String
+  address: String
+  date: String
+  phone: String
+  email: String
+  description: String
+  image: String
+  fullSalary: Float
+  halfSalary: Float
+  events: [Events]
+}
+
+type Events {
+  id: ID!
+  employeeId: ID!
+  yearId: Int!
+  pay: [EventData]!
+  debt: [EventData]!
+}
+
+type EventData {
+  allDay: Boolean!
+  start: String!
+  end: String!
+  salary: String!
+  title: String!
+  money: Float
+  works: [String]
+}

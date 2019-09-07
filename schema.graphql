@@ -1,0 +1,376 @@
+type Business {
+  id: ID!
+  userId: ID!
+  user: User
+  employees(first: Int, after: String): EmployeeConnection
+  name: String!
+  cif: String
+  date: String
+  address: String
+  phone: String
+  email: String
+  web: String
+  image: String
+}
+
+type BusinessConnection {
+  items: [Business]
+  nextToken: String
+}
+
+input CreateBusinessInput {
+  id: ID!
+  userId: ID!
+  name: String!
+  cif: String
+  date: String
+  address: String
+  phone: String
+  email: String
+  web: String
+  image: String
+}
+
+input CreateEmployeeInput {
+  id: ID!
+  businessId: ID!
+  name: String!
+  nif: String
+  address: String
+  date: String
+  phone: String
+  email: String
+  description: String
+  image: String
+  fullSalary: Float
+  halfSalary: Float
+}
+
+input CreateEventInfoInput {
+  id: ID!
+  eventId: ID!
+  eventType: EventType!
+  allDay: Boolean!
+  start: String!
+  end: String!
+  salary: String!
+  title: String!
+  money: Float
+  works: [String]
+}
+
+input CreateEventsInput {
+  id: ID!
+  employeeId: ID!
+  yearId: Int!
+  pay: [EventDataInput]!
+  debt: [EventDataInput]!
+}
+
+input CreateUserInput {
+  id: ID!
+  email: String!
+}
+
+input DeleteBusinessInput {
+  id: ID!
+  userId: ID!
+}
+
+input DeleteEmployeeInput {
+  id: ID!
+  businessId: ID!
+}
+
+input DeleteEventInfoInput {
+  id: ID!
+  eventId: ID!
+}
+
+input DeleteEventsInput {
+  id: ID!
+  employeeId: ID!
+}
+
+input DeleteUserInput {
+  id: ID!
+}
+
+type Employee {
+  id: ID!
+  businessId: ID!
+  name: String!
+  nif: String
+  address: String
+  date: String
+  phone: String
+  email: String
+  description: String
+  image: String
+  fullSalary: Float
+  halfSalary: Float
+  events: [Events]
+}
+
+type EmployeeConnection {
+  items: [Employee]
+  nextToken: String
+}
+
+type EventData {
+  allDay: Boolean!
+  start: String!
+  end: String!
+  salary: String!
+  title: String!
+  money: Float
+  works: [String]
+}
+
+input EventDataInput {
+  allDay: Boolean!
+  start: String!
+  end: String!
+  salary: String!
+  title: String!
+  money: Float
+  works: [String]
+}
+
+type EventInfo {
+  id: ID!
+  eventId: ID!
+  eventType: EventType!
+  allDay: Boolean!
+  start: String!
+  end: String!
+  salary: String!
+  title: String!
+  money: Float
+  works: [String]
+}
+
+type EventInfoConnection {
+  items: [EventInfo]
+  nextToken: String
+}
+
+enum EventType {
+  PAY
+  DEBT
+}
+
+type Events {
+  id: ID!
+  employeeId: ID!
+  yearId: Int!
+  pay: [EventData]!
+  debt: [EventData]!
+}
+
+type EventsConnection {
+  items: [Events]
+  nextToken: String
+}
+
+type Mutation {
+  createUser(input: CreateUserInput!): User
+  updateUser(input: UpdateUserInput!): User
+  deleteUser(input: DeleteUserInput!): User
+  createBusiness(input: CreateBusinessInput!): Business
+  updateBusiness(input: UpdateBusinessInput!): Business
+  deleteBusiness(input: DeleteBusinessInput!): Business
+  createEmployee(input: CreateEmployeeInput!): Employee
+  updateEmployee(input: UpdateEmployeeInput!): Employee
+  deleteEmployee(input: DeleteEmployeeInput!): Employee
+  createEvents(input: CreateEventsInput!): Events
+  updateEvents(input: UpdateEventsInput!): Events
+  deleteEvents(input: DeleteEventsInput!): Events
+  createEventInfo(input: CreateEventInfoInput!): EventInfo
+  updateEventInfo(input: UpdateEventInfoInput!): EventInfo
+  deleteEventInfo(input: DeleteEventInfoInput!): EventInfo
+}
+
+type Query {
+  getAllUsers: [User]
+  getUser(id: ID!): User
+  listUsers(first: Int, after: String): UserConnection
+  getBusiness(id: ID!, userId: ID!): Business
+  listBusinesses(first: Int, after: String): BusinessConnection
+  queryBusinessesByUserIdIndex(
+    userId: ID!
+    first: Int
+    after: String
+  ): BusinessConnection
+  getEmployee(id: ID!, businessId: ID!): Employee
+  listEmployees(first: Int, after: String): EmployeeConnection
+  queryEmployeesByBusinessIdIndex(
+    businessId: ID!
+    first: Int
+    after: String
+  ): EmployeeConnection
+  getEvents(id: ID!, employeeId: ID!): Events
+  getEventsByEmployeeIdIndexByYear(
+    employeeId: ID!
+    yearId: Int!
+  ): EventsConnection
+  listEvents(first: Int, after: String): EventsConnection
+  queryEventsByEmployeeIdIndex(
+    employeeId: ID!
+    first: Int
+    after: String
+  ): EventsConnection
+  getEventInfo(id: ID!, eventId: ID!): EventInfo
+  listEventInfos(first: Int, after: String): EventInfoConnection
+  queryEventInfosByEventIdIndex(
+    eventId: ID!
+    first: Int
+    after: String
+  ): EventInfoConnection
+}
+
+type Subscription {
+  onCreateUser(id: ID, email: String): User
+    @aws_subscribe(mutations: ["createUser"])
+  onUpdateUser(id: ID, email: String): User
+    @aws_subscribe(mutations: ["updateUser"])
+  onDeleteUser(id: ID, email: String): User
+    @aws_subscribe(mutations: ["deleteUser"])
+  onCreateBusiness(
+    id: ID
+    userId: ID
+    name: String
+    cif: String
+    date: String
+  ): Business @aws_subscribe(mutations: ["createBusiness"])
+  onUpdateBusiness(
+    id: ID
+    userId: ID
+    name: String
+    cif: String
+    date: String
+  ): Business @aws_subscribe(mutations: ["updateBusiness"])
+  onDeleteBusiness(
+    id: ID
+    userId: ID
+    name: String
+    cif: String
+    date: String
+  ): Business @aws_subscribe(mutations: ["deleteBusiness"])
+  onCreateEmployee(
+    id: ID
+    businessId: ID
+    name: String
+    nif: String
+    address: String
+  ): Employee @aws_subscribe(mutations: ["createEmployee"])
+  onUpdateEmployee(
+    id: ID
+    businessId: ID
+    name: String
+    nif: String
+    address: String
+  ): Employee @aws_subscribe(mutations: ["updateEmployee"])
+  onDeleteEmployee(
+    id: ID
+    businessId: ID
+    name: String
+    nif: String
+    address: String
+  ): Employee @aws_subscribe(mutations: ["deleteEmployee"])
+  onCreateEvents(id: ID, employeeId: ID): Events
+    @aws_subscribe(mutations: ["createEvents"])
+  onUpdateEvents(id: ID, employeeId: ID): Events
+    @aws_subscribe(mutations: ["updateEvents"])
+  onDeleteEvents(id: ID, employeeId: ID): Events
+    @aws_subscribe(mutations: ["deleteEvents"])
+  onCreateEventInfo(
+    id: ID
+    eventId: ID
+    allDay: Boolean
+    start: String
+    end: String
+  ): EventInfo @aws_subscribe(mutations: ["createEventInfo"])
+  onUpdateEventInfo(
+    id: ID
+    eventId: ID
+    allDay: Boolean
+    start: String
+    end: String
+  ): EventInfo @aws_subscribe(mutations: ["updateEventInfo"])
+  onDeleteEventInfo(
+    id: ID
+    eventId: ID
+    allDay: Boolean
+    start: String
+    end: String
+  ): EventInfo @aws_subscribe(mutations: ["deleteEventInfo"])
+}
+
+input UpdateBusinessInput {
+  id: ID!
+  userId: ID!
+  name: String
+  cif: String
+  date: String
+  address: String
+  phone: String
+  email: String
+  web: String
+  image: String
+}
+
+input UpdateEmployeeInput {
+  id: ID!
+  businessId: ID!
+  name: String
+  nif: String
+  address: String
+  date: String
+  phone: String
+  email: String
+  description: String
+  image: String
+  fullSalary: Float
+  halfSalary: Float
+}
+
+input UpdateEventInfoInput {
+  id: ID!
+  eventId: ID!
+  allDay: Boolean
+  start: String
+  end: String
+  salary: String
+  title: String
+  money: Float
+  works: [String]
+}
+
+input UpdateEventsInput {
+  id: ID!
+  employeeId: ID!
+  yearId: Int!
+  pay: [EventDataInput]!
+  debt: [EventDataInput]!
+}
+
+input UpdateUserInput {
+  id: ID!
+  email: String
+}
+
+type User {
+  id: ID!
+  email: String!
+  business(first: Int, after: String): BusinessConnection
+}
+
+type UserConnection {
+  items: [User]
+  nextToken: String
+}
+
+type schema {
+  query: Query
+}
