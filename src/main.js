@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import './plugins/vuetify'
 import './plugins/amplify'
+import './services/auth'
 import './filters'
 import apolloProvider from './plugins/appSync'
 import App from './App.vue'

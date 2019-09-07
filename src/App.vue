@@ -25,8 +25,7 @@ export default {
   },
   computed: {
     user() {
-      const { username = '' } = this.$store.getters.getUser
-      return username
+      return this.$store.getters.getUser.username
     },
   },
 }

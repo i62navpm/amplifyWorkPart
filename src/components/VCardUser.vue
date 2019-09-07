@@ -73,8 +73,6 @@ export default {
     async logout() {
       try {
         await this.$Amplify.Auth.signOut()
-        this.$router.push({ name: 'auth' })
-        this.$store.commit('setUser', {})
       } catch (err) {
         console.log(err)
       }
