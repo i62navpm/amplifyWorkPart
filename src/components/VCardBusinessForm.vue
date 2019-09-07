@@ -54,7 +54,7 @@
               <v-text-field
                 v-model="company.name"
                 :rules="[rules.required]"
-                label="Name"
+                label="Nombre"
                 required
               />
             </v-flex>
