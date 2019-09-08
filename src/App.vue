@@ -2,7 +2,7 @@
   <v-app>
     <the-toolbar v-if="user" />
     <the-notification />
-    <v-content>
+    <v-content class="main-content">
       <transition
         name="fade"
         mode="out-in"
@@ -30,3 +30,9 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" scoped>
+.main-content {
+  z-index: 5;
+}
+</style>

@@ -179,7 +179,6 @@ export default {
 
 <style lang="scss" scoped>
 .card--flex-toolbar {
-  z-index: 6;
   margin-top: -64px;
 }
 </style>
