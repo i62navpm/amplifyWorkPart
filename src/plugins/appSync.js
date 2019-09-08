@@ -5,14 +5,21 @@ import VueApollo from 'vue-apollo'
 import { Auth } from 'aws-amplify'
 import aws_exports from '../aws-exports'
 import notification from '../mixins/notification'
+import router from '../router'
+import store from '../store'
 
 const config = {
   url: aws_exports.aws_appsync_graphqlEndpoint,
   region: aws_exports.aws_appsync_region,
   auth: {
     type: aws_exports.aws_appsync_authenticationType,
-    jwtToken: async () =>
-      (await Auth.currentSession()).getIdToken().getJwtToken(),
+    jwtToken: async () => {
+      try {
+        return (await Auth.currentSession()).getIdToken().getJwtToken()
+      } catch (err) {
+        return err
+      }
+    },
   },
 }
 
@@ -33,6 +40,11 @@ const apolloProvider = new VueApollo({
   },
   errorHandler(error) {
     notification.methods.notifyError.apply(this, [error])
+    const { networkError = {} } = error
+    if (networkError.statusCode === 401) {
+      store.commit('setUser', {})
+      router.push({ name: 'auth' })
+    }
   },
 })
 
