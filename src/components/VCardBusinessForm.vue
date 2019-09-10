@@ -25,7 +25,7 @@
         ref="form"
         v-model="valid"
         @submit.prevent
-        @keyup.enter.native="save"
+        @keyup.enter.native="submit"
       >
         <v-container>
           <v-layout
@@ -174,7 +174,7 @@ export default {
       }
 
       this.startLoading()
-      this.$emit('onSubmit', this.stopLoading)
+      this.$emit('onSubmit', this.company, this.stopLoading)
     },
     saveImage(image) {
       this.$set(this.company, 'image', image)

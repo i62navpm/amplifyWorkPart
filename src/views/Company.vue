@@ -21,6 +21,8 @@
 </template>
 
 <script>
+import gql from 'graphql-tag'
+import { createCompany } from '../graphql/mutations'
 import VCardBusinessForm from '../components/VCardBusinessForm'
 import notification from '../mixins/notification'
 
@@ -33,17 +35,27 @@ export default {
     closeForm() {
       this.$router.push({ name: 'home' })
     },
-    saveForm(callback) {
-      return new Promise(success =>
-        setTimeout(() => {
-          try {
-            this.notifySuccess('Empresa guardada correctamente')
-            success(callback())
-          } catch ({ message = '' }) {
-            this.notifyError(message)
-          }
-        }, 4000)
-      )
+    async saveCompany(data) {
+      return await this.$apollo.mutate({
+        mutation: gql(createCompany),
+        variables: {
+          input: {
+            ...data,
+            companyUserId: this.$store.state.auth.user.username,
+          },
+        },
+      })
+    },
+    async saveForm(data, cb) {
+      try {
+        await this.saveCompany(data)
+        this.notifySuccess('Empresa guardada correctamente')
+        this.$router.push({ name: 'home' })
+      } catch ({ message = '' }) {
+        this.notifyError(message)
+      } finally {
+        cb()
+      }
     },
   },
 }
