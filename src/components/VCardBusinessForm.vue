@@ -25,7 +25,7 @@
         ref="form"
         v-model="valid"
         @submit.prevent
-        @keyup.enter.native="save"
+        @keyup.enter.native="submit"
       >
         <v-container>
           <v-layout
@@ -55,6 +55,7 @@
                 v-model="company.name"
                 :rules="[rules.required]"
                 label="Nombre"
+                append-icon="person"
                 required
               />
             </v-flex>
@@ -67,6 +68,7 @@
                 :rules="[rules.cif]"
                 label="Cif"
                 mask="A-########"
+                append-icon="credit_card"
                 validate-on-blur
               />
             </v-flex>
@@ -77,6 +79,7 @@
               <v-text-field
                 v-model="company.address"
                 label="Dirección"
+                append-icon="room"
               />
             </v-flex>
             <v-flex
@@ -87,6 +90,7 @@
                 v-model="company.phone"
                 label="Teléfono"
                 mask="#########"
+                append-icon="phone"
               />
             </v-flex>
             <v-flex
@@ -97,6 +101,7 @@
                 v-model="company.email"
                 label="Email"
                 type="email"
+                append-icon="email"
               />
             </v-flex>
             <v-flex
@@ -106,6 +111,7 @@
               <v-text-field
                 v-model="company.web"
                 label="Web"
+                append-icon="web"
               />
             </v-flex>
             <v-flex
@@ -168,7 +174,7 @@ export default {
       }
 
       this.startLoading()
-      this.$emit('onSubmit', this.stopLoading)
+      this.$emit('onSubmit', this.company, this.stopLoading)
     },
     saveImage(image) {
       this.$set(this.company, 'image', image)

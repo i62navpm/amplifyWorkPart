@@ -55,6 +55,7 @@
                 v-model="person.name"
                 :rules="[rules.required]"
                 label="Nombre"
+                append-icon="person"
                 required
               />
             </v-flex>
@@ -67,6 +68,7 @@
                 :rules="[rules.nif]"
                 label="Nif"
                 mask="########-A"
+                append-icon="credit_card"
                 validate-on-blur
               />
             </v-flex>
@@ -78,6 +80,7 @@
                 v-model="person.phone"
                 label="Teléfono"
                 mask="#########"
+                append-icon="phone"
               />
             </v-flex>
             <v-flex
@@ -88,12 +91,14 @@
                 v-model="person.email"
                 label="Email"
                 type="email"
+                append-icon="email"
               />
             </v-flex>
             <v-flex xs12>
               <v-text-field
                 v-model="person.address"
                 label="Dirección"
+                append-icon="room"
               />
             </v-flex>
             <v-flex xs12>
@@ -102,6 +107,7 @@
                 auto-grow
                 box
                 label="Descripción"
+                append-icon="description"
               />
             </v-flex>
             <v-flex
@@ -114,6 +120,7 @@
                 append-outer-icon="euro"
                 type="number"
                 label="Salario completo"
+                append-icon="attach_money"
               />
             </v-flex>
             <v-flex
@@ -126,6 +133,7 @@
                 append-outer-icon="euro"
                 type="number"
                 label="Salario reducido"
+                append-icon="attach_money"
               />
             </v-flex>
             <v-flex
